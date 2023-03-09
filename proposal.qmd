@@ -130,7 +130,7 @@ Billionaires
 
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
-    The data was collected based off Forbes World\'s Billionaires list from 1996 - 2014, and people from Peterson Institute for international economics added more variables.
+    The data was collected based off Forbes World's Billionaires list from 1996 - 2014, and people from Peterson Institute for international economics added more variables.
 
 -   Write a brief description of the observations.
 
@@ -141,7 +141,7 @@ Billionaires
     | year                     | Year data collected                  |
     | company.founded          | Year company founded                 |
     | company.name             | Name of company                      |
-    | company.relationship     | Person\'s role at company            |
+    | company.relationship     | Person's role at company             |
     | company.sector           | Business sector of company           |
     | company.type             | Type of business                     |
     | demographics.age         | Current age of person                |
@@ -189,6 +189,11 @@ Billionaires
 
 ```{r}
 #| label: load-data-2
+
+billionaires <- read_csv("data/billionaires.csv")
+
+glimpse(billionaires)
+
 ```
 
 # Data 3
