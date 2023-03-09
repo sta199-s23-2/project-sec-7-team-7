@@ -18,21 +18,21 @@
     "href": "proposal.html",
     "title": "Project title",
     "section": "",
-    "text": "library(tidyverse)\n\nWarning: package 'ggplot2' was built under R version 4.2.2\n\n\nWarning: package 'tidyr' was built under R version 4.2.2\n\n\nWarning: package 'readr' was built under R version 4.2.2\n\n\nWarning: package 'purrr' was built under R version 4.2.2"
+    "text": "library(tidyverse)"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\nI found the data set on kaggle.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nThis data, however, was originally collected by the University of California at Irvine. It was collected as a synthesis of data from the Hungarian Institute of Cardiology and the Cleveland Clinic foundation.\nWrite a brief description of the observations.\n\nid: (Unique id for each patient)\nage: (Age of the patient in years)\ndataset: (place of study)\nsex: (Male/Female)\ncp: chest pain type ([typical angina, atypical angina, non-anginal, asymptomatic])\ntrestbps: resting blood pressure (resting blood pressure (in mm Hg on admission to the hospital))\nchol: (serum cholesterol in mg/dl)\nfbs: (if fasting blood sugar > 120 mg/dl)\nrestecg: (resting electrocardiographic results)\n-- Values: [normal, stt abnormality, lv hypertrophy]\nthalach: maximum heart rate achieved\nexang: exercise-induced angina (True/ False)\noldpeak: ST depression induced by exercise relative to rest\nslope: the slope of the peak exercise ST segment\nca: number of major vessels (0-3) colored by fluoroscopy\nthal: [normal; fixed defect; reversible defect]\nnum: the predicted attribute 0 means no heart disease, and 1-4 is the stage."
   },
   {
     "objectID": "proposal.html#research-question",
     "href": "proposal.html#research-question",
     "title": "Project title",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nHow does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease?\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nHeart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.\nIdentify the types of variables in your research question. Categorical? Quantitative?\n\nage: quantitative\ndataset: categorical\nsex: categorical\ncp: categorical\ntrestbps: quantitative\nchol: quantitative\nfbs: categorical\nrestecg: categorical\nthalach: quantitative\nexang: categorical\noldpeak: quantitative\nslope: categorical\nca: categorical\nthal: categorical\nnum: categorical"
   },
   {
     "objectID": "proposal.html#literature",
@@ -46,21 +46,21 @@
     "href": "proposal.html#glimpse-of-data",
     "title": "Project title",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data\n\n# add code here\nheart_disease <- read_csv(\"data/heart_disease_uci.csv\")\n\nRows: 920 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (6): sex, dataset, cp, restecg, slope, thal\ndbl (8): id, age, trestbps, chol, thalch, oldpeak, ca, num\nlgl (2): fbs, exang\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message."
   },
   {
     "objectID": "proposal.html#introduction-and-data-1",
     "href": "proposal.html#introduction-and-data-1",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\nThe source of the data is the CORGIS Dataset Project.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nThe data was collected based off Forbes World's Billionaires list from 1996 - 2014, and people from Peterson Institute for international economics added more variables.\nWrite a brief description of the observations.\n\n\n\nVariable \nDescription\n\n\n\n\nname\nName of person\n\n\nrank\nRank of richest in world\n\n\nyear\nYear data collected\n\n\ncompany.founded\nYear company founded\n\n\ncompany.name\nName of company\n\n\ncompany.relationship\nPerson's role at company\n\n\ncompany.sector\nBusiness sector of company\n\n\ncompany.type\nType of business\n\n\ndemographics.age\nCurrent age of person\n\n\ndemographics.gender\nGender of person\n\n\nlocation.citizenship\nCountry of citizenship of person\n\n\nlocation.country.code\nCountry code of citizenship\n\n\nlocation.gdp\nGDP of country of citizenship\n\n\nlocation.region\nRegion of living\n\n\nwealth.type\nType of billionaire\n\n\nwealth.worth\nNet worth in billions\n\n\nwealth.how.category\nWhere money came from\n\n\nwealth.how.from.emerging\nWhether wealth from emerging markets\n\n\nwealth.how.industry\nIndustry of profit\n\n\nwealth.how.inherited\nWay/if money inherited \n\n\nwealth.how.was.founder\nWhether person founded company\n\n\nwealth.how.was.political\nWhether money came from politics"
   },
   {
     "objectID": "proposal.html#research-question-1",
     "href": "proposal.html#research-question-1",
     "title": "Project title",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\n\nDoes the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?\nWhat is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?\n\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nThe research topic is about billionaires and the relationships between different parts of their life and business. The hypothesis for question 1 is that billionaires with higher location gdp are more likely to have founded the company that gave them their wealth, and this holds across age and gender. The hypothesis for question 2 is that billionaires with higher net worth are more likely to be in technology related fields. This relationship changes as age changes because older billionaires are more likely to be in finance since tech was not as big longer ago. The relationship also changes if money was inherited because inherited money more often comes from finance or oil. Age is the best predictor of the sector. \nIdentify the types of variables in your research question. Categorical? Quantitative?\nCategorical: whether billionaire founded company (boolean), gender (string), whether the money was inherited (boolean), sector of company (string)\nQuantitative: location gdp (float), age (integer), wealth (float)"
   },
   {
     "objectID": "proposal.html#literature-1",
@@ -74,7 +74,7 @@
     "href": "proposal.html#glimpse-of-data-1",
     "title": "Project title",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data"
   },
   {
     "objectID": "proposal.html#introduction-and-data-2",

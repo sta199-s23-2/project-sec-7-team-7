@@ -120,21 +120,62 @@ heart_disease <- read_csv("data/heart_disease_uci.csv")
 
 # Data 2
 
+Billionaires
+
 ## Introduction and data
 
 -   Identify the source of the data.
 
+    The source of the data is the CORGIS Dataset Project.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    The data was collected based off Forbes World\'s Billionaires list from 1996 - 2014, and people from Peterson Institute for international economics added more variables.
+
 -   Write a brief description of the observations.
+
+    | Variable                 | Description                          |
+    |--------------------------|--------------------------------------|
+    | name                     | Name of person                       |
+    | rank                     | Rank of richest in world             |
+    | year                     | Year data collected                  |
+    | company.founded          | Year company founded                 |
+    | company.name             | Name of company                      |
+    | company.relationship     | Person\'s role at company            |
+    | company.sector           | Business sector of company           |
+    | company.type             | Type of business                     |
+    | demographics.age         | Current age of person                |
+    | demographics.gender      | Gender of person                     |
+    | location.citizenship     | Country of citizenship of person     |
+    | location.country.code    | Country code of citizenship          |
+    | location.gdp             | GDP of country of citizenship        |
+    | location.region          | Region of living                     |
+    | wealth.type              | Type of billionaire                  |
+    | wealth.worth             | Net worth in billions                |
+    | wealth.how.category      | Where money came from                |
+    | wealth.how.from.emerging | Whether wealth from emerging markets |
+    | wealth.how.industry      | Industry of profit                   |
+    | wealth.how.inherited     | Way/if money inherited               |
+    | wealth.how.was.founder   | Whether person founded company       |
+    | wealth.how.was.political | Whether money came from politics     |
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    1.  Does the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?
+
+    2.  What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    The research topic is about billionaires and the relationships between different parts of their life and business. The hypothesis for question 1 is that billionaires with higher location gdp are more likely to have founded the company that gave them their wealth, and this holds across age and gender. The hypothesis for question 2 is that billionaires with higher net worth are more likely to be in technology related fields. This relationship changes as age changes because older billionaires are more likely to be in finance since tech was not as big longer ago. The relationship also changes if money was inherited because inherited money more often comes from finance or oil. Age is the best predictor of the sector. 
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+    Categorical: whether billionaire founded company (boolean), gender (string), whether the money was inherited (boolean), sector of company (string)
+
+    Quantitative: location gdp (float), age (integer), wealth (float)
 
 ## Literature
 
@@ -148,8 +189,6 @@ heart_disease <- read_csv("data/heart_disease_uci.csv")
 
 ```{r}
 #| label: load-data-2
-
-# add code here
 ```
 
 # Data 3

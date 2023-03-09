@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -53,7 +58,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -66,7 +71,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -157,7 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -207,35 +212,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.2.2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'purrr' was built under R version 4.2.2</code></pre>
-</div>
 </div>
 <section id="data-1" class="level1">
 <h1>Data 1</h1>
 <section id="introduction-and-data" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li><p>Identify the source of the data.</p>
+<p>I found the data set on kaggle.</p></li>
+<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p>
+<p>This data, however, was originally collected by the University of California at Irvine. It was collected as a synthesis of data from the Hungarian Institute of Cardiology and the Cleveland Clinic foundation.</p></li>
+<li><p>Write a brief description of the observations.</p>
+<ol type="1">
+<li><p>id: (Unique id for each patient)</p></li>
+<li><p>age: (Age of the patient in years)</p></li>
+<li><p>dataset: (place of study)</p></li>
+<li><p>sex: (Male/Female)</p></li>
+<li><p>cp: chest pain type ([typical angina, atypical angina, non-anginal, asymptomatic])</p></li>
+<li><p>trestbps: resting blood pressure (resting blood pressure (in mm Hg on admission to the hospital))</p></li>
+<li><p>chol: (serum cholesterol in mg/dl)</p></li>
+<li><p>fbs: (if fasting blood sugar &gt; 120 mg/dl)</p></li>
+<li><p>restecg: (resting electrocardiographic results)<br>
+-- Values: [normal, stt abnormality, lv hypertrophy]</p></li>
+<li><p>thalach: maximum heart rate achieved</p></li>
+<li><p>exang: exercise-induced angina (True/ False)</p></li>
+<li><p>oldpeak: ST depression induced by exercise relative to rest</p></li>
+<li><p>slope: the slope of the peak exercise ST segment</p></li>
+<li><p>ca: number of major vessels (0-3) colored by fluoroscopy</p></li>
+<li><p>thal: [normal; fixed defect; reversible defect]</p></li>
+<li><p>num: the predicted attribute 0 means no heart disease, and 1-4 is the stage.</p></li>
+</ol></li>
 </ul>
 </section>
 <section id="research-question" class="level2">
 <h2 class="anchored" data-anchor-id="research-question">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
+<p>How does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease?</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
+<p>Heart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
+<ol type="1">
+<li><p>age: quantitative</p></li>
+<li><p>dataset: categorical</p></li>
+<li><p>sex: categorical</p></li>
+<li><p>cp: categorical</p></li>
+<li><p>trestbps: quantitative</p></li>
+<li><p>chol: quantitative</p></li>
+<li><p>fbs: categorical</p></li>
+<li><p>restecg: categorical</p></li>
+<li><p>thalach: quantitative</p></li>
+<li><p>exang: categorical</p></li>
+<li><p>oldpeak: quantitative</p></li>
+<li><p>slope: categorical</p></li>
+<li><p>ca: categorical</p></li>
+<li><p>thal: categorical</p></li>
+<li><p>num: categorical</p></li>
+</ol></li>
 </ul>
 </section>
 <section id="literature" class="level2">
@@ -249,26 +282,146 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/heart_disease_uci.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 920 Columns: 16
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): sex, dataset, cp, restecg, slope, thal
+dbl (8): id, age, trestbps, chol, thalch, oldpeak, ca, num
+lgl (2): fbs, exang
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
 </div>
 </section>
 </section>
 <section id="data-2" class="level1">
 <h1>Data 2</h1>
+<p>Billionaires</p>
 <section id="introduction-and-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data-1">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li><p>Identify the source of the data.</p>
+<p>The source of the data is the CORGIS Dataset Project.</p></li>
+<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p>
+<p>The data was collected based off Forbes World's Billionaires list from 1996 - 2014, and people from Peterson Institute for international economics added more variables.</p></li>
+<li><p>Write a brief description of the observations.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Variable&nbsp;</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>name</td>
+<td>Name of person</td>
+</tr>
+<tr class="even">
+<td>rank</td>
+<td>Rank of richest in world</td>
+</tr>
+<tr class="odd">
+<td>year</td>
+<td>Year data collected</td>
+</tr>
+<tr class="even">
+<td>company.founded</td>
+<td>Year company founded</td>
+</tr>
+<tr class="odd">
+<td>company.name</td>
+<td>Name of company</td>
+</tr>
+<tr class="even">
+<td>company.relationship</td>
+<td>Person's role at company</td>
+</tr>
+<tr class="odd">
+<td>company.sector</td>
+<td>Business sector of company</td>
+</tr>
+<tr class="even">
+<td>company.type</td>
+<td>Type of business</td>
+</tr>
+<tr class="odd">
+<td>demographics.age</td>
+<td>Current age of person</td>
+</tr>
+<tr class="even">
+<td>demographics.gender</td>
+<td>Gender of person</td>
+</tr>
+<tr class="odd">
+<td>location.citizenship</td>
+<td>Country of citizenship of person</td>
+</tr>
+<tr class="even">
+<td>location.country.code</td>
+<td>Country code of citizenship</td>
+</tr>
+<tr class="odd">
+<td>location.gdp</td>
+<td>GDP of country of citizenship</td>
+</tr>
+<tr class="even">
+<td>location.region</td>
+<td>Region of living</td>
+</tr>
+<tr class="odd">
+<td>wealth.type</td>
+<td>Type of billionaire</td>
+</tr>
+<tr class="even">
+<td>wealth.worth</td>
+<td>Net worth in billions</td>
+</tr>
+<tr class="odd">
+<td>wealth.how.category</td>
+<td>Where money came from</td>
+</tr>
+<tr class="even">
+<td>wealth.how.from.emerging</td>
+<td>Whether wealth from emerging markets</td>
+</tr>
+<tr class="odd">
+<td>wealth.how.industry</td>
+<td>Industry of profit</td>
+</tr>
+<tr class="even">
+<td>wealth.how.inherited</td>
+<td>Way/if money inherited&nbsp;</td>
+</tr>
+<tr class="odd">
+<td>wealth.how.was.founder</td>
+<td>Whether person founded company</td>
+</tr>
+<tr class="even">
+<td>wealth.how.was.political</td>
+<td>Whether money came from politics</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 </section>
 <section id="research-question-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-1">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
+<ol type="1">
+<li><p>Does the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?</p></li>
+<li><p>What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?</p></li>
+</ol></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
+<p>The research topic is about billionaires and the relationships between different parts of their life and business. The hypothesis for question 1 is that billionaires with higher location gdp are more likely to have founded the company that gave them their wealth, and this holds across age and gender. The hypothesis for question 2 is that billionaires with higher net worth are more likely to be in technology related fields. This relationship changes as age changes because older billionaires are more likely to be in finance since tech was not as big longer ago. The relationship also changes if money was inherited because inherited money more often comes from finance or oil. Age is the best predictor of the sector.&nbsp;</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
+<p>Categorical: whether billionaire founded company (boolean), gender (string), whether the money was inherited (boolean), sector of company (string)</p>
+<p>Quantitative: location gdp (float), age (integer), wealth (float)</p></li>
 </ul>
 </section>
 <section id="literature-1" class="level2">
@@ -282,7 +435,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
 </section>
 </section>
@@ -299,9 +452,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="research-question-2" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-2">Research question</h2>
 <ul>
-<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
-<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
-<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
+<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
+<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
 </ul>
 </section>
 <section id="literature-2" class="level2">
@@ -315,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="glimpse-of-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-2">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -392,7 +545,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
