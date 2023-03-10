@@ -540,11 +540,23 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <ul>
 <li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
 </ul>
-<p>How does smoking frequency vary by location? Has smoking frequency changed over time?</p>
+<p>How does smoking frequency vary by location? How has overall smoking frequency changed over time? How has smoking frequency changed in different regions of the United States over time?</p>
 <ul>
-<li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
-<li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
+<li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
 </ul>
+<p>The research topic is about how smoking frequency has changed over time, particularly by states/regions. The hypothesis for question 1 is that smoking frequently is more common in urban, developed areas and also more common is very rural areas. The hypothesis for question 2 is that overall smoking frequency has decreased over time due to increased awareness about health risks; additionally, it is hypothesized that there is now a higher percentage of former smokers across the United States. The hypothesis for question 3 is that smoking frequency has decreased in lower population regions but is more constant in higher population regions.</p>
+<ul>
+<li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
+</ul>
+<ol type="1">
+<li>year: quantitative, double</li>
+<li>state: categorical, character</li>
+<li>smoke_everyday: quantitative, double</li>
+<li>smoke_some_days: quantitative, double</li>
+<li>former_smoker: quantitative, double</li>
+<li>never_smoked: quantitative, double</li>
+<li>location_1: categorical, character</li>
+</ol>
 </section>
 <section id="literature-2" class="level2">
 <h2 class="anchored" data-anchor-id="literature-2">Literature</h2>
@@ -557,9 +569,29 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cdc_smoker &lt;- read_csv("data/BRFSS_Prevalence_and_Trends__Tobacco_Use_-_Four_Level_Smoking_Data_for_1995-2010-2.csv")</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#glimpse(cdc_smoker)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cdc_smoker <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/smoking.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 876 Columns: 7
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): State, Location 1
+dbl (5): Year, Smoke everyday, Smoke some days, Former smoker, Never smoked
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cdc_smoker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 876
+Columns: 7
+$ Year              &lt;dbl&gt; 1996, 2005, 2005, 2002, 2003, 2000, 2002, 1996, 2006…
+$ State             &lt;chr&gt; "Puerto Rico", "Virgin Islands", "Puerto Rico", "Vir…
+$ `Smoke everyday`  &lt;dbl&gt; 9.4, 5.3, 7.9, 7.0, 26.3, 15.3, 15.0, 24.9, 17.7, 17…
+$ `Smoke some days` &lt;dbl&gt; 5.1, 2.8, 5.2, 2.4, 7.8, 5.4, 6.2, 3.7, 5.7, 5.6, 4.…
+$ `Former smoker`   &lt;dbl&gt; 16.0, 12.8, 16.9, 12.1, 14.3, 28.3, 26.0, 23.7, 20.1…
+$ `Never smoked`    &lt;dbl&gt; 69.5, 79.1, 70.0, 78.5, 51.7, 50.9, 52.8, 47.6, 56.4…
+$ `Location 1`      &lt;chr&gt; "Puerto Rico", "Virgin Islands", "Puerto Rico", "Vir…</code></pre>
+</div>
 </div>
 
 

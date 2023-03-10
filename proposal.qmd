@@ -238,11 +238,21 @@ The data was from the CDC's Behavioral Risk Factor Surveillance System annual da
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
-How does smoking frequency vary by location? Has smoking frequency changed over time?
+How does smoking frequency vary by location? How has overall smoking frequency changed over time? How has smoking frequency changed in different regions of the United States over time?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+The research topic is about how smoking frequency has changed over time, particularly by states/regions. The hypothesis for question 1 is that smoking frequently is more common in urban, developed areas and also more common is very rural areas. The hypothesis for question 2 is that overall smoking frequency has decreased over time due to increased awareness about health risks; additionally, it is hypothesized that there is now a higher percentage of former smokers across the United States. The hypothesis for question 3 is that smoking frequency has decreased in lower population regions but is more constant in higher population regions.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+1.  year: quantitative, double
+2.  state: categorical, character
+3.  smoke_everyday: quantitative, double
+4.  smoke_some_days: quantitative, double
+5.  former_smoker: quantitative, double
+6.  never_smoked: quantitative, double
+7.  location_1: categorical, character
 
 ## Literature
 
@@ -256,9 +266,8 @@ How does smoking frequency vary by location? Has smoking frequency changed over 
 
 ```{r}
 #| label: load-data-3
-#| message: false
 
-#cdc_smoker <- read_csv("data/BRFSS_Prevalence_and_Trends__Tobacco_Use_-_Four_Level_Smoking_Data_for_1995-2010-2.csv")
+cdc_smoker <- read_csv("data/smoking.csv")
 
-#glimpse(cdc_smoker)
+glimpse(cdc_smoker)
 ```
