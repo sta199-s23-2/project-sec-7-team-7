@@ -103,13 +103,21 @@ library(tidyverse)
 
 ## Literature
 
--   Find one published credible article on the topic you are interested in researching.
+-   **Find one published credible article on the topic you are interested in researching.**
 
--   Provide a one paragraph summary about the article.
+    "Prevalence and Trends of Coronary Heart Disease in the United States, 2011 to 2018" Yi-Ting Hana Lee, MPH; Jing Fang, MD, MS; Linda Schieb, MSPH; et al.
 
--   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+    https://jamanetwork.com/journals/jamacardiology/fullarticle/2787707
 
-## Glimpse of data
+-   **Provide a one paragraph summary about the article.**
+
+    This article provided a broad overview of recent trends in coronary heart disease (CHD) in the United States from 2011-2018. This study relied on self-reported data from patients. Overall there was a minor decrease in the prevalence of CHD in the United States among all demographics. Between 2011 and 2018, the rate dropped from 6.2% to 6.0%. There were plenty of geographic and demographic differences and trends that are worth noting. First, there were some declines in adults over 65, college graduates, and residents of Utah. However, the prevalence of CHD rose in areas like Oregon and in adults 18-44.
+
+-   **In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.**
+
+    The data we have focuses more on the health aspects of heart disease, while the study looks at broad trends in demographics and geography. Being able to break down and group the data by patient information like race and age is helpful; our dataset has some of these demographic identifiers, but more of them could help our analysis.
+
+-   Glimpse of data
 
 ```{r}
 #| label: load-data-1
@@ -179,11 +187,17 @@ Billionaires
 
 ## Literature
 
--   Find one published credible article on the topic you are interested in researching.
+-   **Find one published credible article on the topic you are interested in researching.**
 
--   Provide a one paragraph summary about the article.
+    "Russia's Billionaires" Daniel Treisman, 2016. https://www.aeaweb.org/articles?id=10.1257/aer.p20161068
 
--   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+-   **Provide a one paragraph summary about the article.**
+
+    This paper analyzes the rise and longevity of billionaires from Russia during the past 20 years. The data comes from Forbes research efforts. Since the early 2000, the number of Russian billionaires has increased significantly. Many Russian billionaires made money from oil, banking, gas, and metal; however, Treisman found that the sectors Russain billionaire's make money from have become more diverse. Now some billionaires have come from industries like real estate, chemicals, and information technology.
+
+-   **In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.**
+
+    Our research question closely parallels the work from Treisman's paper; the data from the paper has many overlapping characteristics and variables. As a team, we can learn from the methods and analysis from the paper to inform our own analysis.
 
 ## Glimpse of data
 
