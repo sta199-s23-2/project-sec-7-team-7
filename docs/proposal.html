@@ -171,21 +171,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#introduction-and-data" id="toc-introduction-and-data" class="nav-link" data-scroll-target="#introduction-and-data">Introduction and data</a></li>
   <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research question</a></li>
   <li><a href="#literature" id="toc-literature" class="nav-link" data-scroll-target="#literature">Literature</a></li>
-  <li><a href="#glimpse-of-data" id="toc-glimpse-of-data" class="nav-link" data-scroll-target="#glimpse-of-data">Glimpse of data</a></li>
   </ul></li>
   <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2">Data 2</a>
   <ul class="collapse">
   <li><a href="#introduction-and-data-1" id="toc-introduction-and-data-1" class="nav-link" data-scroll-target="#introduction-and-data-1">Introduction and data</a></li>
   <li><a href="#research-question-1" id="toc-research-question-1" class="nav-link" data-scroll-target="#research-question-1">Research question</a></li>
   <li><a href="#literature-1" id="toc-literature-1" class="nav-link" data-scroll-target="#literature-1">Literature</a></li>
-  <li><a href="#glimpse-of-data-1" id="toc-glimpse-of-data-1" class="nav-link" data-scroll-target="#glimpse-of-data-1">Glimpse of data</a></li>
+  <li><a href="#glimpse-of-data" id="toc-glimpse-of-data" class="nav-link" data-scroll-target="#glimpse-of-data">Glimpse of data</a></li>
   </ul></li>
   <li><a href="#data-3" id="toc-data-3" class="nav-link" data-scroll-target="#data-3">Data 3</a>
   <ul class="collapse">
   <li><a href="#introduction-and-data-2" id="toc-introduction-and-data-2" class="nav-link" data-scroll-target="#introduction-and-data-2">Introduction and data</a></li>
   <li><a href="#research-question-2" id="toc-research-question-2" class="nav-link" data-scroll-target="#research-question-2">Research question</a></li>
   <li><a href="#literature-2" id="toc-literature-2" class="nav-link" data-scroll-target="#literature-2">Literature</a></li>
-  <li><a href="#glimpse-of-data-2" id="toc-glimpse-of-data-2" class="nav-link" data-scroll-target="#glimpse-of-data-2">Glimpse of data</a></li>
+  <li><a href="#glimpse-of-data-1" id="toc-glimpse-of-data-1" class="nav-link" data-scroll-target="#glimpse-of-data-1">Glimpse of data</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -274,13 +273,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li><p><strong>Find one published credible article on the topic you are interested in researching.</strong></p>
+<p>“Prevalence and Trends of Coronary Heart Disease in the United States, 2011 to 2018” Yi-Ting Hana&nbsp;Lee,&nbsp;MPH; Jing&nbsp;Fang,&nbsp;MD, MS; Linda&nbsp;Schieb,&nbsp;MSPH; et al.</p>
+<p>https://jamanetwork.com/journals/jamacardiology/fullarticle/2787707</p></li>
+<li><p><strong>Provide a one paragraph summary about the article.</strong></p>
+<p>This article provided a broad overview of recent trends in coronary heart disease (CHD) in the United States from 2011-2018. This study relied on self-reported data from patients. Overall there was a minor decrease in the prevalence of CHD in the United States among all demographics. Between 2011 and 2018, the rate dropped from 6.2% to 6.0%. There were plenty of geographic and demographic differences and trends that are worth noting. First, there were some declines in adults over 65, college graduates, and residents of Utah. However, the prevalence of CHD rose in areas like Oregon and in adults 18-44.</p></li>
+<li><p><strong>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</strong></p>
+<p>The data we have focuses more on the health aspects of heart disease, while the study looks at broad trends in demographics and geography. Being able to break down and group the data by patient information like race and age is helpful; our dataset has some of these demographic identifiers, but more of them could help our analysis.</p></li>
+<li><p>Glimpse of data</p></li>
 </ul>
-</section>
-<section id="glimpse-of-data" class="level2">
-<h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>heart_disease <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/heart_disease_uci.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -427,13 +428,16 @@ lgl (2): fbs, exang
 <section id="literature-1" class="level2">
 <h2 class="anchored" data-anchor-id="literature-1">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li><p><strong>Find one published credible article on the topic you are interested in researching.</strong></p>
+<p>“Russia’s Billionaires” Daniel Treisman, 2016. https://www.aeaweb.org/articles?id=10.1257/aer.p20161068</p></li>
+<li><p><strong>Provide a one paragraph summary about the article.</strong></p>
+<p>This paper analyzes the rise and longevity of billionaires from Russia during the past 20 years. The data comes from Forbes research efforts. Since the early 2000, the number of Russian billionaires has increased significantly. Many Russian billionaires made money from oil, banking, gas, and metal; however, Treisman found that the sectors Russain billionaire’s make money from have become more diverse. Now some billionaires have come from industries like real estate, chemicals, and information technology.</p></li>
+<li><p><strong>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</strong></p>
+<p>Our research question closely parallels the work from Treisman’s paper; the data from the paper has many overlapping characteristics and variables. As a team, we can learn from the methods and analysis from the paper to inform our own analysis.</p></li>
 </ul>
 </section>
-<section id="glimpse-of-data-1" class="level2">
-<h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
+<section id="glimpse-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>billionaires <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/billionaires.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -482,15 +486,62 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <section id="introduction-and-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="introduction-and-data-2">Introduction and data</h2>
 <ul>
-<li><p>Identify the source of the data.</p></li>
-<li><p>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</p></li>
-<li><p>Write a brief description of the observations.</p></li>
+<li>Identify the source of the data.</li>
+</ul>
+<p>The source of the data is the Centers for Disease Control and Prevention.</p>
+<ul>
+<li>State when and how it was originally collected (by the original data curator, not necessarily how you found the data).</li>
+</ul>
+<p>The data was from the CDC’s Behavioral Risk Factor Surveillance System annual data from 1995-2010. The data collected contains percentages weighted by population characteristics.</p>
+<ul>
+<li><p>Write a brief description of the observations.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>Year data collected</td>
+</tr>
+<tr class="even">
+<td>state</td>
+<td>State data is from</td>
+</tr>
+<tr class="odd">
+<td>smoke_everyday</td>
+<td>Percentage smokes everyday</td>
+</tr>
+<tr class="even">
+<td>smoke_some_days</td>
+<td>Percentage smokes some days</td>
+</tr>
+<tr class="odd">
+<td>former_smoker</td>
+<td>Percentage former smoker</td>
+</tr>
+<tr class="even">
+<td>never_smoked</td>
+<td>Percentage never smoked</td>
+</tr>
+<tr class="odd">
+<td>location_1</td>
+<td>Location coordinates</td>
+</tr>
+</tbody>
+</table></li>
 </ul>
 </section>
 <section id="research-question-2" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-2">Research question</h2>
 <ul>
-<li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p></li>
+<li>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</li>
+</ul>
+<p>How does smoking frequency vary by location? Has smoking frequency changed over time?</p>
+<ul>
 <li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p></li>
 <li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p></li>
 </ul>
@@ -503,10 +554,12 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
 </ul>
 </section>
-<section id="glimpse-of-data-2" class="level2">
-<h2 class="anchored" data-anchor-id="glimpse-of-data-2">Glimpse of data</h2>
+<section id="glimpse-of-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#cdc_smoker &lt;- read_csv("data/BRFSS_Prevalence_and_Trends__Tobacco_Use_-_Four_Level_Smoking_Data_for_1995-2010-2.csv")</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#glimpse(cdc_smoker)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

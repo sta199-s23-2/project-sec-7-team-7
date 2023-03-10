@@ -216,13 +216,29 @@ glimpse(billionaires)
 
 -   Identify the source of the data.
 
+The source of the data is the Centers for Disease Control and Prevention.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+The data was from the CDC's Behavioral Risk Factor Surveillance System annual data from 1995-2010. The data collected contains percentages weighted by population characteristics.
+
 -   Write a brief description of the observations.
+
+    | Variable        | Description                 |
+    |-----------------|-----------------------------|
+    | year            | Year data collected         |
+    | state           | State data is from          |
+    | smoke_everyday  | Percentage smokes everyday  |
+    | smoke_some_days | Percentage smokes some days |
+    | former_smoker   | Percentage former smoker    |
+    | never_smoked    | Percentage never smoked     |
+    | location_1      | Location coordinates        |
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+
+How does smoking frequency vary by location? Has smoking frequency changed over time?
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
@@ -240,6 +256,9 @@ glimpse(billionaires)
 
 ```{r}
 #| label: load-data-3
+#| message: false
 
-# add code here
+#cdc_smoker <- read_csv("data/BRFSS_Prevalence_and_Trends__Tobacco_Use_-_Four_Level_Smoking_Data_for_1995-2010-2.csv")
+
+#glimpse(cdc_smoker)
 ```
