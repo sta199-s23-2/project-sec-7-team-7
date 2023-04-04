@@ -4,9 +4,10 @@ format: html
 editor: visual
 ---
 
-This project was developed by team 7 of section 7. For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
+This project was developed by team 7 of section 7 for [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
 
 -   Anya Bettegowda: A freshman from Connecticut who is majoring in Economics, with a minor in Statistics and a minor in Psychology.
 -   Carly Hubert: A sophomore from New Jersey who is majoring in Computer Science.
 -   Kethan Poduri: A freshman from Virginia who is double majoring in Computer Science and Statistics.
 -   Oliver Hess: A sophomore from Florida who is double majoring in Public Policy and Art History.
+
