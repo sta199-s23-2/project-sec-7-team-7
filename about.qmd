@@ -4,10 +4,9 @@ format: html
 editor: visual
 ---
 
-This project was developed by **\[team name\]** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
+This project was developed by team 7 of section 7. For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
--   ...
+-   Anya Bettegowda: A freshman from Connecticut who is majoring in Economics, with a minor in Statistics and a minor in Psychology.
+-   Carly Hubert: A sophomore from New Jersey who is majoring in Computer Science.
+-   Kethan Poduri: A freshman from Virginia who is double majoring in Computer Science and Statistics.
+-   Oliver Hess: A sophomore from Florida who is double majoring in Public Policy and Art History.
