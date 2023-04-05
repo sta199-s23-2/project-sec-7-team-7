@@ -124,6 +124,7 @@ library(tidyverse)
 
 # add code here
 heart_disease <- read_csv("data/heart_disease_uci.csv")
+glimpse(heart_disease)
 ```
 
 # Data 2
