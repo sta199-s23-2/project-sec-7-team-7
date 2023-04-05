@@ -43,4 +43,16 @@ heart_disease <- heart_disease |>
   mutate(num = ifelse((num >= "1"), "1", "0"))
 ```
 
+```{r}
+#| label: heart-disease-based on sex
+  heart_disease |>
+  ggplot(
+    aes(x = sex, fill = num)) + 
+    geom_bar(position = "fill") +
+  labs(title = "Males vs Females in Heart Disease Rates", x = "Gender",
+       y = "Proportion", fill = "Weather or not they Have Heart Disease") +
+  theme_classic()
+
+```
+
 # Results
