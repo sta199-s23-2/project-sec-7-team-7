@@ -67,7 +67,7 @@ library(tidyverse)
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
-    Heart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.
+    Heart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease. Because the response variable has five levels in factors from 0-4. I plan on combining levels 1-4 into level 1, as that will indicate the presence of heart disease. I also beleive that accuracy is the only metric needed to measure success as there seems to be a roughly even amount of people with and without heart disease, and therefore I do not think that the model will be biased.
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 

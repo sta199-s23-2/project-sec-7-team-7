@@ -9,6 +9,25 @@ execute:
 
 # Introduction and data
 
+We found the data set on kaggle, but the data was initially collected by the Hungarian Institute of Cardiology, and the Cleveland Clinic Foundation. This synthesis of information was donated to the University of California at Irvine's Machine learning Repository in 1988. Some relevant variables include:
+
+1.  age: (Age of the patient in years
+2.  dataset: (place of study)
+3.  sex: (Male/Female)
+4.  cp: chest pain type (\[typical angina, atypical angina, non-anginal, asymptomatic\])
+5.  trestbps: resting blood pressure (resting blood pressure (in mm Hg on admission to the hospital))
+6.  chol: (serum cholesterol in mg/dl)
+7.  fbs: (if fasting blood sugar \> 120 mg/dl)
+8.  restecg: (resting electrocardiographic results)\
+    \-- Values: \[normal, stt abnormality, lv hypertrophy\]
+9.  thalach: maximum heart rate achieved
+10. exang: exercise-induced angina (True/ False)
+11. oldpeak: ST depression induced by exercise relative to rest
+12. slope: the slope of the peak exercise ST segment
+13. ca: number of major vessels (0-3) colored by fluoroscopy
+14. thal: \[normal; fixed defect; reversible defect\]
+15. num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.
+
 # Methodology
 
 # Results 
