@@ -30,4 +30,17 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 
 # Methodology
 
-# Results 
+```{r}
+#| label: load-data
+heart_disease <- read_csv("data/heart_disease_uci.csv")
+glimpse(heart_disease)
+```
+
+```{r}
+#| label: change-response-var
+
+heart_disease <- heart_disease |>
+  mutate(num = ifelse((num >= "1"), "1", "0"))
+```
+
+# Results
