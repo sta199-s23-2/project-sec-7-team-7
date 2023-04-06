@@ -63,12 +63,32 @@ heart_disease <- heart_disease |>
     ggplot(
       aes(x = age, fill = if_else(num == 1, "Yes", "No"))
       ) +
-    geom_histogram(position = "fill") +
+    geom_histogram(position = "fill", bins = 30) +
     labs(title = "Heart Disease Rates By Age",
          x = "Age",
          y = "Proportion",
          fill = "Heart Disease Presence") +
     theme_classic()
 ```
+
+As age increases, the proportion of people with heart disease increases.
+
+```{r}
+#| label: heart-disease-based-on-cholesterol
+  
+heart_disease |>
+  #filter(chol != 0) |>
+  ggplot(
+    aes(x = chol, fill = if_else(num == 1, "Yes", "No"))
+    ) +
+  geom_histogram(position = "fill", bins = 20) +
+  labs(title = "Heart Disease Rates By Cholesterol",
+       x = "Cholestorl Levels",
+       y = "Proportion",         
+       fill = "Heart Disease Presence") +
+  theme_classic()
+```
+
+As cholesterol increases, heart disease rates increase. *For the data entries with cholesterol of 0, there are high rates of heart disease, but should this be filtered out because chol = 0 is impossible and should not be in data set?*
 
 # Results
