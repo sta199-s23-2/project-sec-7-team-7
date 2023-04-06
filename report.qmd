@@ -44,15 +44,31 @@ heart_disease <- heart_disease |>
 ```
 
 ```{r}
-#| label: heart-disease-based on sex
+#| label: heart-disease-based-on-sex
   heart_disease |>
   ggplot(
     aes(x = sex, fill = num)) + 
     geom_bar(position = "fill") +
-  labs(title = "Males vs Females in Heart Disease Rates", x = "Gender",
-       y = "Proportion", fill = "Weather or not they Have Heart Disease") +
+  labs(title = "Males vs Females in Heart Disease Rates", 
+       x = "Gender",
+       y = "Proportion", 
+       fill = "Whether or not they Have Heart Disease") +
   theme_classic()
 
+```
+
+```{r}
+#| label: heart-disease-based-on-age
+  heart_disease |>
+    ggplot(
+      aes(x = age, fill = if_else(num == 1, "Yes", "No"))
+      ) +
+    geom_histogram(position = "fill") +
+    labs(title = "Heart Disease Rates By Age",
+         x = "Age",
+         y = "Proportion",
+         fill = "Heart Disease Presence") +
+    theme_classic()
 ```
 
 # Results
