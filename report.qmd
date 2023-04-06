@@ -83,12 +83,30 @@ heart_disease |>
     ) +
   geom_histogram(position = "fill", bins = 20) +
   labs(title = "Heart Disease Rates By Cholesterol",
-       x = "Cholestorl Levels",
+       x = "Cholesterol Levels",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
   theme_classic()
 ```
 
 As cholesterol increases, heart disease rates increase. *For the data entries with cholesterol of 0, there are high rates of heart disease, but should this be filtered out because chol = 0 is impossible and should not be in data set?*
+
+```{r}
+#| label: heart-disease-based-on-blood-sugar
+  
+heart_disease |>
+  filter(!is.na(fbs)) |>
+  ggplot(
+    aes(x = fbs, fill = if_else(num == 1, "Yes", "No"))
+    ) +
+  geom_bar(position = "fill") +
+  labs(title = "Heart Disease Rates By Blood Sugar",
+       x = "Blood Sugar Levels Above 150",
+       y = "Proportion",         
+       fill = "Heart Disease Presence") +
+  theme_classic()
+```
+
+People with fasting blood sugar above 150 are move likely to have heart disease than those with fbs below 150.
 
 # Results
