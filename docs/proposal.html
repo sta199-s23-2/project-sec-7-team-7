@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
 <p>How does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease?</p></li>
 <li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
-<p>Heart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.</p></li>
+<p>Heart disease affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. I hypothesize that the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. I also believe that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease. Because the response variable has five levels in factors from 0-4. I plan on combining levels 1-4 into level 1, as that will indicate the presence of heart disease. I also beleive that accuracy is the only metric needed to measure success as there seems to be a roughly even amount of people with and without heart disease, and therefore I do not think that the model will be biased.</p></li>
 <li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
 <ol type="1">
 <li><p>age: quantitative</p></li>
@@ -295,6 +295,27 @@ lgl (2): fbs, exang
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(heart_disease)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 920
+Columns: 16
+$ id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18…
+$ age      &lt;dbl&gt; 63, 67, 67, 37, 41, 56, 62, 57, 63, 53, 57, 56, 56, 44, 52, 5…
+$ sex      &lt;chr&gt; "Male", "Male", "Male", "Male", "Female", "Male", "Female", "…
+$ dataset  &lt;chr&gt; "Cleveland", "Cleveland", "Cleveland", "Cleveland", "Clevelan…
+$ cp       &lt;chr&gt; "typical angina", "asymptomatic", "asymptomatic", "non-angina…
+$ trestbps &lt;dbl&gt; 145, 160, 120, 130, 130, 120, 140, 120, 130, 140, 140, 140, 1…
+$ chol     &lt;dbl&gt; 233, 286, 229, 250, 204, 236, 268, 354, 254, 203, 192, 294, 2…
+$ fbs      &lt;lgl&gt; TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,…
+$ restecg  &lt;chr&gt; "lv hypertrophy", "lv hypertrophy", "lv hypertrophy", "normal…
+$ thalch   &lt;dbl&gt; 150, 108, 129, 187, 172, 178, 160, 163, 147, 155, 148, 153, 1…
+$ exang    &lt;lgl&gt; FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, T…
+$ oldpeak  &lt;dbl&gt; 2.3, 1.5, 2.6, 3.5, 1.4, 0.8, 3.6, 0.6, 1.4, 3.1, 0.4, 1.3, 0…
+$ slope    &lt;chr&gt; "downsloping", "flat", "flat", "downsloping", "upsloping", "u…
+$ ca       &lt;dbl&gt; 0, 3, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0…
+$ thal     &lt;chr&gt; "fixed defect", "normal", "reversable defect", "normal", "nor…
+$ num      &lt;dbl&gt; 0, 2, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0…</code></pre>
 </div>
 </div>
 </section>
@@ -409,15 +430,20 @@ lgl (2): fbs, exang
 </tbody>
 </table></li>
 </ul>
+<p>Any null values will be filtered out if being used in analysis.</p>
 </section>
 <section id="research-question-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-1">Research question</h2>
 <ul>
 <li><p>A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
 <ol type="1">
-<li><p>Does the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?</p></li>
-<li><p>What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?</p></li>
-</ol></li>
+<li>Does the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?</li>
+</ol>
+<p>The response variable is “wealth.how.was.founder”. The time range will be the entire time the data was collected.</p>
+<ol type="1">
+<li>What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?</li>
+</ol>
+<p>I will verify the hypothesized relationship by determining which of the listed demographics is the best predictor using r squared, as this will diminished statistical bias.</p></li>
 <li><p>A description of the research topic along with a concise statement of your hypotheses on this topic.</p>
 <p>The research topic is about billionaires and the relationships between different parts of their life and business. The hypothesis for question 1 is that billionaires with higher location gdp are more likely to have founded the company that gave them their wealth, and this holds across age and gender. The hypothesis for question 2 is that billionaires with higher net worth are more likely to be in technology related fields. This relationship changes as age changes because older billionaires are more likely to be in finance since tech was not as big longer ago. The relationship also changes if money was inherited because inherited money more often comes from finance or oil. Age is the best predictor of the sector.&nbsp;</p></li>
 <li><p>Identify the types of variables in your research question. Categorical? Quantitative?</p>
@@ -439,7 +465,7 @@ lgl (2): fbs, exang
 <section id="glimpse-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>billionaires <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/billionaires.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>billionaires <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/billionaires.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 2614 Columns: 22
 ── Column specification ────────────────────────────────────────────────────────
@@ -451,7 +477,7 @@ lgl  (3): wealth.how.from emerging, wealth.how.was founder, wealth.how.was p...
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(billionaires)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(billionaires)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 2,614
 Columns: 22
@@ -544,7 +570,7 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <ul>
 <li>A description of the research topic along with a concise statement of your hypotheses on this topic.</li>
 </ul>
-<p>The research topic is about how smoking frequency has changed over time, particularly by states/regions. The hypothesis for question 1 is that smoking frequently is more common in urban, developed areas and also more common is very rural areas. The hypothesis for question 2 is that overall smoking frequency has decreased over time due to increased awareness about health risks; additionally, it is hypothesized that there is now a higher percentage of former smokers across the United States. The hypothesis for question 3 is that smoking frequency has decreased in lower population regions but is more constant in higher population regions.</p>
+<p>The research topic is about how smoking frequency has changed over time, particularly by states/regions. The hypothesis for question 1 is that smoking frequently is more common in urban, developed areas and also more common is very rural areas. For this hypothesis, the classifications of urban and rural will be taken from the Bureau of the Census. An urban area is defined as an area with a population of 50,000 or more and a rural area is defined as a place with fewer than 2,500 inhabitants. These areas have already been coded by the Bureau of the Census. The hypothesis for question 2 is that overall smoking frequency has decreased over time due to increased awareness about health risks; additionally, it is hypothesized that there is now a higher percentage of former smokers across the United States. The hypothesis for question 3 is that smoking frequency has decreased in lower population regions but is more constant in higher population regions. Population will be measured by population density criteria from the Bureau of the Census with lower population being defined as 35 people per square mile and higher population defined as 1,600 people per square mile or more.</p>
 <ul>
 <li>Identify the types of variables in your research question. Categorical? Quantitative?</li>
 </ul>
@@ -576,7 +602,7 @@ $ `wealth.how.was political` &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cdc_smoker <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/smoking.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cdc_smoker <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/smoking.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 876 Columns: 7
 ── Column specification ────────────────────────────────────────────────────────
@@ -587,7 +613,7 @@ dbl (5): Year, Smoke everyday, Smoke some days, Former smoker, Never smoked
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cdc_smoker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(cdc_smoker)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 876
 Columns: 7
