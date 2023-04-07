@@ -31,6 +31,14 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 # Methodology
 
 ```{r}
+#| label: load-tidy
+
+library(tidyverse)
+library(tidymodels)
+
+```
+
+```{r}
 #| label: load-data
 heart_disease <- read_csv("data/heart_disease_uci.csv")
 glimpse(heart_disease)
@@ -119,13 +127,55 @@ heart_disease |>
     ) +
   facet_wrap(~sex) + 
   geom_histogram(position = "fill", bins = 30) +
-  labs(title = "Heart Disease Rates By Blood Pressure",
+  labs(title = "Heart Disease Rates By Blood Pressure for Each Gender",
        x = "Blood Pressure",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
   theme_classic()
 ```
 
-For females, as blood pressure increases past about 115, higher bp is correlated with higher rates of heart disease. Below 115, lower bp is correlated with higher rates of heart disease. For males, There is not as strong a correlation between blood pressure and heart disease rates. We filtered would bp = 0 because that is not possible and a filler of not recorded data.
+For females, as blood pressure increases past about 115, higher bp is correlated with higher rates of heart disease. Below 115, lower bp is correlated with higher rates of heart disease. For males, There is not as strong a correlation between blood pressure and heart disease rates. We filtered would bp = 0 because that is not possible and a filler of not recorded data. We chose to facet this by gender because men and women have different average blood pressures.
+
+```{r}
+#| label: find-r-squared
+
+#sex
+linear_reg() |>
+  set_engine("lm") |>
+  fit(num ~ sex, data = heart_disease) |>
+  glance() |>
+  pull(adj.r.squared)
+
+#age
+linear_reg() |>
+  set_engine("lm") |>
+  fit(num ~ age, data = heart_disease) |>
+  glance() |>
+  pull(adj.r.squared)
+
+#cholesterol
+linear_reg() |>
+  set_engine("lm") |>
+  fit(num ~ chol, data = heart_disease) |>
+  glance() |>
+  pull(adj.r.squared)
+
+#blood sugar
+linear_reg() |>
+  set_engine("lm") |>
+  fit(num ~ fbs, data = heart_disease) |>
+  glance() |>
+  pull(adj.r.squared)
+
+#bp and gender
+linear_reg() |>
+  set_engine("lm") |>
+  fit(num ~ trestbps * sex, data = heart_disease) |>
+  glance() |>
+  pull(adj.r.squared)
+
+```
+
+The best predictor of heart disease rates is age because it has the highest adjusted r-squared. The worst predictor of heart disease rates is blood sugar because it has the lowest adjusted r-squared.
 
 # Results
