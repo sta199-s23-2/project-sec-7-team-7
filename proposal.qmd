@@ -168,13 +168,19 @@ Billionaires
     | wealth.how.was.founder   | Whether person founded company       |
     | wealth.how.was.political | Whether money came from politics     |
 
+Any null values will be filtered out if being used in analysis.
+
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
     1.  Does the location gdp of a billionaire affect how likely they are to have founded the company that gave them their wealth? Does this relationship change across age? Gender? Which demographic is the best predictor of if they founded the company?
 
-    2.  What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?
+    The response variable is "wealth.how.was.founder". The time range will be the entire time the data was collected.
+
+    1.  What is the relationship between the net worth of a billionaire and the sector of the company that gave them their wealth? Does this relationship change across age? Whether the money was inherited? Which demographic is the best predictor of the sector their company is in?
+
+    I will verify the hypothesized relationship by determining which of the listed demographics is the best predictor using r squared, as this will diminished statistical bias.
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
