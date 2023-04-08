@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "Heart Disease Analysis"
 subtitle: "Report"
 format: html
 editor: visual
@@ -48,19 +48,19 @@ glimpse(heart_disease)
 #| label: change-response-var
 
 heart_disease <- heart_disease |>
-  mutate(num = ifelse((num >= "1"), "1", "0"))
+  mutate(num = ifelse((num >= 1), 1, 0))
 ```
 
 ```{r}
 #| label: heart-disease-based-on-sex
   heart_disease |>
   ggplot(
-    aes(x = sex, fill = num)) + 
+    aes(x = sex, fill = if_else(num == 1, "Yes", "No"))) + 
     geom_bar(position = "fill") +
   labs(title = "Males vs Females in Heart Disease Rates", 
        x = "Gender",
        y = "Proportion", 
-       fill = "Whether or not they Have Heart Disease") +
+       fill = "Heart Disease Presence") +
   theme_classic() +
   scale_color_viridis_d()
 
@@ -141,6 +141,8 @@ heart_disease |>
 
 For females, as blood pressure increases past about 115, higher bp is correlated with higher rates of heart disease. Below 115, lower bp is correlated with higher rates of heart disease. For males, There is not as strong a correlation between blood pressure and heart disease rates. We filtered would bp = 0 because that is not possible and a filler of not recorded data. We chose to facet this by gender because men and women have different average blood pressures.
 
+# Results
+
 ```{r}
 #| label: find-r-squared
 
@@ -161,7 +163,8 @@ linear_reg() |>
 #cholesterol
 linear_reg() |>
   set_engine("lm") |>
-  fit(num ~ chol, data = heart_disease) |>
+  fit(num ~ chol, data = heart_disease |>
+        filter(chol != 0)) |>
   glance() |>
   pull(adj.r.squared)
 
@@ -175,12 +178,14 @@ linear_reg() |>
 #bp and gender
 linear_reg() |>
   set_engine("lm") |>
-  fit(num ~ trestbps * sex, data = heart_disease) |>
+  fit(num ~ trestbps * sex, data = heart_disease |>
+        filter(trestbps != 0)) |>
   glance() |>
   pull(adj.r.squared)
 
+
 ```
 
-The best predictor of heart disease rates is age because it has the highest adjusted r-squared. The worst predictor of heart disease rates is blood sugar because it has the lowest adjusted r-squared.
+The best predictor of heart disease rates is an interactive model of blood pressure and sex because it has the highest adjusted r-squared. The second best predictor is sex itself. The worst predictor of heart disease rates is cholesterol because it has the lowest adjusted r-squared.
 
-# Results
+# 
