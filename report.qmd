@@ -61,7 +61,8 @@ heart_disease <- heart_disease |>
        x = "Gender",
        y = "Proportion", 
        fill = "Whether or not they Have Heart Disease") +
-  theme_classic()
+  theme_classic() +
+  scale_color_viridis_d()
 
 ```
 
@@ -76,7 +77,8 @@ heart_disease <- heart_disease |>
          x = "Age",
          y = "Proportion",
          fill = "Heart Disease Presence") +
-    theme_classic()
+    theme_classic() +
+    scale_color_viridis_d()
 ```
 
 As age increases, the proportion of people with heart disease increases.
@@ -94,7 +96,8 @@ heart_disease |>
        x = "Cholesterol Levels",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
-  theme_classic()
+  theme_classic() +
+  scale_color_viridis_d()
 ```
 
 As cholesterol increases, heart disease rates increase. We filtered out entries with chol = 0 because that is not possible.
@@ -112,7 +115,8 @@ heart_disease |>
        x = "Blood Sugar Levels Above 150",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
-  theme_classic()
+  theme_classic() +
+  scale_color_viridis_d()
 ```
 
 People with fasting blood sugar above 150 are move likely to have heart disease than those with fbs below 150.
@@ -131,7 +135,8 @@ heart_disease |>
        x = "Blood Pressure",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
-  theme_classic()
+  theme_classic() +
+  scale_color_viridis_d()
 ```
 
 For females, as blood pressure increases past about 115, higher bp is correlated with higher rates of heart disease. Below 115, lower bp is correlated with higher rates of heart disease. For males, There is not as strong a correlation between blood pressure and heart disease rates. We filtered would bp = 0 because that is not possible and a filler of not recorded data. We chose to facet this by gender because men and women have different average blood pressures.
