@@ -9,6 +9,12 @@ execute:
 
 # Introduction and data
 
+The topic we chose to assess is: How does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? We chose to research this topic to explore what variables affect the prevalence of heart disease using data from patients in Cleveland, Hungary, Switzerland, and the VA Long Beach. We hope that by examining the correlation between these variables and presence of heart disease, we can gain insight into how/to what extent these variables contribute to a heart disease diagnosis. Understanding what leads to heart disease is incredibly important as it affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. According to the CDC, heart disease is responsible for around 1 every 5 deaths which is why it is critical to understand the responsibility of underlying factors.
+
+We hypothesize that firstly, the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. Secondly, we hypothesize that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.
+
+We do acknowledge the potential ethical concerns of this research, with the main concern being results communication, specifically that we accurately represent our results. If we misinterpret/misrepresent our results unintentionally, it could be concerning, especially given the topic of our research. Ways to prevent this ethical concern is by formulating research questions in a way that tries to find out the truth rather than proving a viewpoint, by including data outliers that may not fit with our hypothesis, and more.
+
 We found the data set on kaggle, but the data was initially collected by the Hungarian Institute of Cardiology, and the Cleveland Clinic Foundation. This synthesis of information was donated to the University of California at Irvine's Machine learning Repository in 1988. Some relevant variables include:
 
 1.  age: (Age of the patient in years
@@ -119,7 +125,7 @@ heart_disease |>
   scale_color_viridis_d()
 ```
 
-People with fasting blood sugar above 150 are move likely to have heart disease than those with fbs below 150.
+People with fasting blood sugar above 150 are more likely to have heart disease than those with fbs below 150.
 
 ```{r}
 #| label: heart-disease-based-on-blood-pressure
