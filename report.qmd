@@ -34,6 +34,20 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 14. thal: \[normal; fixed defect; reversible defect\]
 15. num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.
 
+## Literature Review
+
+Citation:
+
+"Prevalence and Trends of Coronary Heart Disease in the United States, 2011 to 2018" Yi-Ting Hana Lee, MPH; Jing Fang, MD, MS; Linda Schieb, MSPH; et al.
+
+https://jamanetwork.com/journals/jamacardiology/fullarticle/2787707
+
+Summary:
+
+This article provided a broad overview of recent trends in coronary heart disease (CHD) in the United States from 2011-2018. This study relied on self-reported data from patients. Overall there was a minor decrease in the prevalence of CHD in the United States among all demographics. Between 2011 and 2018, the rate dropped from 6.2% to 6.0%. There were plenty of geographic and demographic differences and trends that are worth noting. First, there were some declines in adults over 65, college graduates, and residents of Utah. However, the prevalence of CHD rose in areas like Oregon and in adults 18-44.
+
+The data we have focuses more on the health aspects of heart disease, while the study looks at broad trends in demographics and geography. Being able to break down and group the data by patient information like race and age is helpful; our dataset has some of these demographic identifiers, but more of them could help our analysis.
+
 # Methodology
 
 ```{r}
