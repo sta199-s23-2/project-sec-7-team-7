@@ -144,48 +144,62 @@ For females, as blood pressure increases past about 115, higher bp is correlated
 # Results
 
 ```{r}
-#| label: find-r-squared
+#| label: find-regression-and-AIC
+
+heart_disease <- heart_disease |>
+  mutate(num = as.factor(num))
 
 #sex
-linear_reg() |>
-  set_engine("lm") |>
-  fit(num ~ sex, data = heart_disease) |>
-  glance() |>
-  pull(adj.r.squared)
+sex_reg <- logistic_reg() |>
+  set_engine("glm") |>
+  fit(num ~ sex, data = heart_disease, family = "binomial")
+
+glance(sex_reg)$AIC
 
 #age
-linear_reg() |>
-  set_engine("lm") |>
-  fit(num ~ age, data = heart_disease) |>
-  glance() |>
-  pull(adj.r.squared)
+age_reg <- logistic_reg() |>
+  set_engine("glm") |>
+  fit(num ~ age, data = heart_disease, family = "binomial") 
+
+glance(age_reg)$AIC
 
 #cholesterol
-linear_reg() |>
-  set_engine("lm") |>
+chol_reg <- logistic_reg() |>
+  set_engine("glm") |>
   fit(num ~ chol, data = heart_disease |>
-        filter(chol != 0)) |>
-  glance() |>
-  pull(adj.r.squared)
+        filter(chol != 0), family = "binomial")
+
+glance(chol_reg)$AIC
 
 #blood sugar
-linear_reg() |>
-  set_engine("lm") |>
-  fit(num ~ fbs, data = heart_disease) |>
-  glance() |>
-  pull(adj.r.squared)
+fbs_reg <- logistic_reg() |>
+  set_engine("glm") |>
+  fit(num ~ fbs, data = heart_disease, family = "binomial")
 
-#bp and gender
-linear_reg() |>
-  set_engine("lm") |>
+glance(fbs_reg)$AIC
+
+#bp * sex
+bp_int_sex_reg <- logistic_reg() |>
+  set_engine("glm") |>
   fit(num ~ trestbps * sex, data = heart_disease |>
-        filter(trestbps != 0)) |>
-  glance() |>
-  pull(adj.r.squared)
+        filter(trestbps != 0), family = "binomial")
 
+glance(bp_int_sex_reg)$AIC
+
+#blood sugar * age
+fbs_int_age_reg <- logistic_reg() |>
+  set_engine("glm") |>
+  fit(num ~ fbs*age, data = heart_disease, family = "binomial")
+
+glance(fbs_int_age_reg)$AIC
+
+#blood sugar + age
+fbs_add_age_reg <- logistic_reg() |>
+  set_engine("glm") |>
+  fit(num ~ fbs+age, data = heart_disease, family = "binomial")
+
+glance(fbs_add_age_reg)$AIC
 
 ```
-
-The best predictor of heart disease rates is an interactive model of blood pressure and sex because it has the highest adjusted r-squared. The second best predictor is sex itself. The worst predictor of heart disease rates is cholesterol because it has the lowest adjusted r-squared.
 
 # 
