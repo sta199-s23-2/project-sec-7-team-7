@@ -255,3 +255,5 @@ $log(\hat{p} / (1-\hat{p})) = -9.54 + .024*chol + .162*age - .0004 * chol * age$
 where $\hat{p}$ is the probability of heart disease.
 
 We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. We then wanted to see how certain interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease.
+
+# Discussion
