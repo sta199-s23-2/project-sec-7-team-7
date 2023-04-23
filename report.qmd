@@ -215,8 +215,29 @@ add_chol_sex <- logistic_reg() |>
 
 glance(add_chol_sex)$AIC
 
+#best tidy
+add_chol_sex |>
+  tidy()
+
+#second best tidy
+int_chol_age |>
+  tidy()
+
+
 ```
 
 The best predictor of heart disease rates is an additive model of cholesterol and and sex because it has the lowest AIC of 919. The second best predictor is an interactive model of cholesterol and age, with an AIC of 926. The worst predictor of hearth disease rates is age, with an AIC of 1193.
+
+Best Model (chol + sex):
+
+$log(\hat{p} / (1-\hat{p})) = -2.76 + .006 * chol + 1.6 * sex$
+
+where $\hat{p}$ is the probability of heart disease and sex = 1 if male and sex = 0 if female.
+
+Second Best Model (chol \* age)
+
+$log(\hat{p} / (1-\hat{p})) = -9.54 + .024*chol + .162*age - .0004 * chol * age$
+
+where $\hat{p}$ is the probability of heart disease.
 
 We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. We then wanted to see how certain interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease.
