@@ -208,8 +208,6 @@ glance(fbs_add_age_reg)$AIC
 
 ```
 
-<<<<<<< HEAD
-=======
 The best predictor of heart disease rates is an interactive model of blood pressure and sex because it has the highest adjusted r-squared. The second best predictor is sex itself. The worst predictor of heart disease rates is cholesterol because it has the lowest adjusted r-squared.
 
 ```{r}
@@ -219,5 +217,3 @@ The best predictor of heart disease rates is an interactive model of blood press
 
 ```
 
->>>>>>> 811eb103efd0ccbb52207a4a3d37254c5133b917
-# 
