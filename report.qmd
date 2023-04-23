@@ -97,9 +97,9 @@ heart_disease |>
   ggplot(
     aes(x = chol, fill = if_else(num == 1, "Yes", "No"))
     ) +
-  geom_histogram(position = "fill", bins = 20) +
+  geom_histogram(position = "fill", bins = 10) +
   labs(title = "Heart Disease Rates By Cholesterol",
-       x = "Cholesterol Levels",
+       x = "Cholesterol Levels (mg/dl)",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
   theme_classic() +
@@ -118,7 +118,7 @@ heart_disease |>
     ) +
   geom_bar(position = "fill") +
   labs(title = "Heart Disease Rates By Blood Sugar",
-       x = "Blood Sugar Levels Above 150",
+       x = "Blood Sugar Levels Above 150 mg/dl",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
   theme_classic() +
@@ -136,9 +136,9 @@ heart_disease |>
     aes(x = trestbps, fill = if_else(num == 1, "Yes", "No"))
     ) +
   facet_wrap(~sex) + 
-  geom_histogram(position = "fill", bins = 30) +
+  geom_histogram(position = "fill", bins = 7) +
   labs(title = "Heart Disease Rates By Blood Pressure for Each Gender",
-       x = "Blood Pressure",
+       x = "Blood Pressure (mm Hg)",
        y = "Proportion",         
        fill = "Heart Disease Presence") +
   theme_classic() +
