@@ -215,9 +215,6 @@ add_chol_sex <- logistic_reg() |>
 
 glance(add_chol_sex)$AIC
 
-add_chol_sex |>
-  tidy()
-
 ```
 
 The best predictor of heart disease rates is an additive model of cholesterol and and sex because it has the lowest AIC of 919. The second best predictor is an interactive model of cholesterol and age, with an AIC of 926. The worst predictor of hearth disease rates is age, with an AIC of 1193.
