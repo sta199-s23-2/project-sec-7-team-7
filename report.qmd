@@ -193,11 +193,11 @@ bp_int_sex_reg <- logistic_reg() |>
 glance(bp_int_sex_reg)$AIC
 
 #cholesterol * age
-fbs_int_age_reg <- logistic_reg() |>
+int_chol_age <- logistic_reg() |>
   set_engine("glm") |>
   fit(num ~ chol * age, data = heart_disease, family = "binomial")
 
-glance(fbs_int_age_reg)$AIC
+glance(int_chol_age)$AIC
 
 #blood sugar + age
 fbs_add_age_reg <- logistic_reg() |>
@@ -207,9 +207,11 @@ fbs_add_age_reg <- logistic_reg() |>
 glance(fbs_add_age_reg)$AIC
 
 #chol + sex
-fbs_add_chol_sex <- logistic_reg() |>
+add_chol_sex <- logistic_reg() |>
   set_engine("glm") |>
   fit(num ~ chol + sex, data = heart_disease, family = "binomial")
+
+glance(add_chol_sex)$AIC
 
 ```
 
