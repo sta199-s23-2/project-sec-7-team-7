@@ -265,7 +265,7 @@ Alternate hypothesis: The true proportion of males with heart disease is not the
 $H_0: \pi_m - \pi_f = 0$            $H_a: \pi_m - \pi_f \neq 0$
 
 ```{r}
-#| observed-stat-sex
+#| label: observed-stat-sex
 
 heart_disease_fct |>
   group_by(sex, num) |>
