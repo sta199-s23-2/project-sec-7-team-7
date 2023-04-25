@@ -34,6 +34,20 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 14. thal: \[normal; fixed defect; reversible defect\]
 15. num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.
 
+## Literature Review
+
+Citation:
+
+"Prevalence and Trends of Coronary Heart Disease in the United States, 2011 to 2018" Yi-Ting Hana Lee, MPH; Jing Fang, MD, MS; Linda Schieb, MSPH; et al.
+
+https://jamanetwork.com/journals/jamacardiology/fullarticle/2787707
+
+Summary:
+
+This article provided a broad overview of recent trends in coronary heart disease (CHD) in the United States from 2011-2018. This study relied on self-reported data from patients. Overall there was a minor decrease in the prevalence of CHD in the United States among all demographics. Between 2011 and 2018, the rate dropped from 6.2% to 6.0%. There were plenty of geographic and demographic differences and trends that are worth noting. First, there were some declines in adults over 65, college graduates, and residents of Utah. However, the prevalence of CHD rose in areas like Oregon and in adults 18-44.
+
+The data we have focuses more on the health aspects of heart disease, while the study looks at broad trends in demographics and geography. Being able to break down and group the data by patient information like race and age is helpful; our dataset has some of these demographic identifiers, but more of them could help our analysis.
+
 # Methodology
 
 ```{r}
@@ -152,27 +166,27 @@ For females, as blood pressure increases past about 115, higher bp is correlated
 ```{r}
 #| label: find-regression-and-AIC
 
-heart_disease <- heart_disease |>
+heart_disease_fct <- heart_disease |>
   mutate(num = as.factor(num))
 
 #sex
 sex_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ sex, data = heart_disease, family = "binomial")
+  fit(num ~ sex, data = heart_disease_fct, family = "binomial")
 
 glance(sex_reg)$AIC
 
 #age
 age_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ age, data = heart_disease, family = "binomial") 
+  fit(num ~ age, data = heart_disease_fct, family = "binomial") 
 
 glance(age_reg)$AIC
 
 #cholesterol
 chol_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ chol, data = heart_disease |>
+  fit(num ~ chol, data = heart_disease_fct |>
         filter(chol != 0), family = "binomial")
 
 glance(chol_reg)$AIC
@@ -180,14 +194,14 @@ glance(chol_reg)$AIC
 #blood sugar
 fbs_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ fbs, data = heart_disease, family = "binomial")
+  fit(num ~ fbs, data = heart_disease_fct, family = "binomial")
 
 glance(fbs_reg)$AIC
 
 #bp * sex
 bp_int_sex_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ trestbps * sex, data = heart_disease |>
+  fit(num ~ trestbps * sex, data = heart_disease_fct |>
         filter(trestbps != 0), family = "binomial")
 
 glance(bp_int_sex_reg)$AIC
@@ -195,7 +209,7 @@ glance(bp_int_sex_reg)$AIC
 #cholesterol * age
 int_chol_age <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ chol * age, data = heart_disease |>
+  fit(num ~ chol * age, data = heart_disease_fct |>
         filter(chol != 0), family = "binomial")
 
 glance(int_chol_age)$AIC
@@ -203,20 +217,146 @@ glance(int_chol_age)$AIC
 #blood sugar + age
 fbs_add_age_reg <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ fbs + age, data = heart_disease, family = "binomial")
+  fit(num ~ fbs + age, data = heart_disease_fct, family = "binomial")
 
 glance(fbs_add_age_reg)$AIC
 
 #chol + sex
 add_chol_sex <- logistic_reg() |>
   set_engine("glm") |>
-  fit(num ~ chol + sex, data = heart_disease |>
+  fit(num ~ chol + sex, data = heart_disease_fct |>
         filter(chol != 0), family = "binomial")
 
 glance(add_chol_sex)$AIC
+
+#best tidy
+add_chol_sex |>
+  tidy()
+
+#second best tidy
+int_chol_age |>
+  tidy()
+
 
 ```
 
 The best predictor of heart disease rates is an additive model of cholesterol and and sex because it has the lowest AIC of 919. The second best predictor is an interactive model of cholesterol and age, with an AIC of 926. The worst predictor of hearth disease rates is age, with an AIC of 1193.
 
+Best Model (chol + sex):
+
+$log(\hat{p} / (1-\hat{p})) = -2.76 + .006 * chol + 1.6 * sex$
+
+where $\hat{p}$ is the probability of heart disease and sex = 1 if male and sex = 0 if female.
+
+Second Best Model (chol \* age)
+
+$log(\hat{p} / (1-\hat{p})) = -9.54 + .024*chol + .162*age - .0004 * chol * age$
+
+where $\hat{p}$ is the probability of heart disease.
+
 We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. We then wanted to see how certain interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease.
+
+Hypothesis Test 1:
+
+Null hypothesis: The true proportion of males (m) with heart disease is the same as the true proportion of females (f) with heart disease.
+
+Alternate hypothesis: The true proportion of males with heart disease is not the same as the true proportion of females with heart disease.
+
+$H_0: \pi_m - \pi_f = 0$ $H_a: \pi_m - \pi_f \neq 0$
+
+```{r}
+#| label: observed-stat-sex
+
+heart_disease_fct |>
+  group_by(sex, num) |>
+  summarize(p = n())
+
+obs_prop_diff <- 459 / (267 + 459) - 50 / (144 + 50)
+
+obs_prop_diff
+
+```
+
+The observed difference in proportion is .3744994.
+
+```{r}
+#| label: hypothesis-test-sex
+
+set.seed(1234)
+
+null_dist <- heart_disease_fct |>
+  specify(response = num , explanatory = sex, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("Male", "Female"))
+
+null_dist |>
+ get_p_value(obs_stat = obs_prop_diff, direction = "two-sided") 
+
+```
+
+The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of men and women who get heart disease are not the same.
+
+```{r}
+#| label: gender-null-dist-vis
+
+visualize(null_dist) +
+ shade_p_value(obs_stat = obs_prop_diff, direction = "two-sided") 
+
+```
+
+This visualization shows that based on the simulation, it is unlikely for men and women to have the same rates of heart disease.
+
+Hypothesis Test 2:
+
+Null hypothesis: The true proportion of people over 50 (over) with heart disease is the same as the true proportion of those 50 and under (under) with heart disease.
+
+Alternate hypothesis: The true proportion of people over 50 with heart disease is greater than the true proportion of those 50 and under with heart disease.
+
+$H_0: \pi_{over} - \pi_{under} = 0$ $H_a: \pi_{over} - \pi_{under} > 0$
+
+```{r}
+#| label: observed-stat-age
+
+heart_disease_50 <- heart_disease_fct |>
+  mutate(over_50 = if_else(age > 50, "Yes", "No")) 
+
+heart_disease_50 |>
+  group_by(over_50, num) |>
+  summarize(x = n())
+
+obs_prop_diff2 <- 384 / (219 + 384) - 125 / (192 + 125)
+
+obs_prop_diff2
+
+```
+
+The observed difference in proportion is .2424942.
+
+```{r}
+#| label: hypothesis-test-age
+
+null_dist2 <- heart_disease_50 |>
+  specify(response = num , explanatory = over_50, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("Yes", "No"))
+
+null_dist2 |>
+ get_p_value(obs_stat = obs_prop_diff2, direction = "greater") 
+
+```
+
+The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people over 50 who get heart disease is greater than the proportion of people 50 and under who get heart disease.
+
+```{r}
+#| label: age-null-dist-vis
+
+visualize(null_dist2) +
+ shade_p_value(obs_stat = obs_prop_diff2, direction = "greater") 
+
+```
+
+This visualization shows that based on the simulation, it is unlikely for those over 50 and under 50 to have the same rates of heart disease.
+
+# Discussion
