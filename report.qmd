@@ -262,7 +262,7 @@ Null hypothesis: The true proportion of males (m) with heart disease is the same
 
 Alternate hypothesis: The true proportion of males with heart disease is not the same as the true proportion of females with heart disease.
 
-$H_0: \pi_m - \pi_f = 0$            $H_a: \pi_m - \pi_f \neq 0$
+$H_0: \pi_m - \pi_f = 0$ $H_a: \pi_m - \pi_f \neq 0$
 
 ```{r}
 #| label: observed-stat-sex
@@ -313,7 +313,7 @@ Null hypothesis: The true proportion of people over 50 (over) with heart disease
 
 Alternate hypothesis: The true proportion of people over 50 with heart disease is greater than the true proportion of those 50 and under with heart disease.
 
-$H_0: \pi_{over} - \pi_{under} = 0$       $H_a: \pi_{over} - \pi_{under} > 0$
+$H_0: \pi_{over} - \pi_{under} = 0$ $H_a: \pi_{over} - \pi_{under} > 0$
 
 ```{r}
 #| label: observed-stat-age
@@ -347,7 +347,7 @@ null_dist2 |>
 
 ```
 
-The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people over 50 and the proportion of people 50 and under who get heart disease are not the same.
+The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people over 50 who get heart disease is greater than the proportion of people 50 and under who get heart disease.
 
 ```{r}
 #| label: age-null-dist-vis
