@@ -97,7 +97,7 @@ heart_disease |>
   ggplot(
     aes(x = chol, fill = if_else(num == 1, "Yes", "No"))
     ) +
-  geom_histogram(position = "fill", bins = 10) +
+  geom_histogram(position = "fill", bins = 9) +
   labs(title = "Heart Disease Rates By Cholesterol",
        x = "Cholesterol Levels (mg/dl)",
        y = "Proportion",         
