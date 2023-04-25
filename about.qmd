@@ -10,4 +10,3 @@ This project was developed by team 7 of section 7 for [STA 199: Introduction to 
 -   Carly Hubert: A sophomore from New Jersey who is majoring in Computer Science.
 -   Kethan Poduri: A freshman from Virginia who is double majoring in Computer Science and Statistics.
 -   Oliver Hess: A sophomore from Florida who is double majoring in Public Policy and Art History.
-
