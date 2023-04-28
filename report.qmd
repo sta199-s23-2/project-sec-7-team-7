@@ -9,7 +9,7 @@ execute:
 
 # Introduction and data
 
-The topic we chose to assess is: How does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? We chose to research this topic to explore what variables affect the prevalence of heart disease using data from patients in Cleveland, Hungary, Switzerland, and the VA Long Beach. We hope that by examining the correlation between these variables and presence of heart disease, we can gain insight into how/to what extent these variables contribute to a heart disease diagnosis. Understanding what leads to heart disease is incredibly important as it affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. According to the CDC, heart disease is responsible for around 1 every 5 deaths which is why it is critical to understand the responsibility of underlying factors.
+The topic we chose to assess is: How does heart disease presence vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? We chose to research this topic to explore what variables affect the prevalence of heart disease using data from patients in Cleveland, Hungary, Switzerland, and the VA Long Beach. We hope that by examining the correlation between these variables and presence of heart disease, we can gain insight into how/to what extent these variables contribute to a heart disease diagnosis. Understanding what leads to heart disease is incredibly important as it affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. According to the CDC, heart disease is responsible for around 1 every 5 deaths which is why it is critical to understand the responsibility of underlying factors.
 
 We hypothesize that firstly, the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. Secondly, we hypothesize that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.
 
@@ -365,19 +365,24 @@ This visualization shows that based on the simulation, it is unlikely for those 
 
 # Results
 
+Our research question was: how does heart disease presence vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? Through a hypothesis test we were able to determine that there is enough statistically significant evidence to conclude that the rate of heart disease in men is not equal to the rate of heart disease in women. Furthermore, though data visualization, we were able to determine that the rate of heart disease in men is greater than that of women.
+
+We were also able to determine that age is a significant factor in heart disease and that there was enough statistically significant evidence to conclude that the rate of heart disease in people over 50 is greater than the rate of heart disease in people under 50. We also saw a positive correlation between the cholesterol, blood sugar, and blood pressure levels and heart disease rates.
+
+While constructing our logistic regression to model whether or not a person will contract heart disease, we found that an additive model of cholesterol and sex would be the best predictors of whether or not a person would contract heart disease.
+
+Our best model had this equation:
+
+$log(\hat{p} / (1-\hat{p})) = -2.76 + .006 * chol + 1.6 * sex$
+
+In this case, sex would be a 1 if the person was a male, and 0 if the person was a female.
+
+Overall, we were able to complete our purpose and we found that age, sex, cholesterol levels, blood sugar, and blood pressure levels were all indicators of heart disease, however, sex and cholesterol were the two most accurate predictors.
+
 # Discussion
 
 There were three key results related to our primary questions that we found significant. First, the rate of heart disease in men is greater than the rate in women. Our visualizations and analysis back this claim. Second, cholesterol and sex were the two best predictors of whether or not an individual may or may not have heart disease. Our models that used the variables of cholesterol and sex had the lowest AIC values. Finally, people who are above the age of 50 were much more likely to have heart disease, and this followed a trend of increased heart disease with age. These findings were supported with our models and our analysis.
 
 However, our data and analysis were limited in some ways, and we acknowledge some changes to make that will make our research stronger. First, our data set is fairly old, as it was made in 1988. This data may not be as up to date as we would like. Perhaps advancement in the field of heart health could yield entirely new data to examine, and the results from our analysis could no longer be applicable to heart disease patients today. Second,
 
-Significant Conclusions:
-● The rate of heart disease in men is significantly greater than in women
-● Cholesterol and sex are the two best predictors of whether or not an individual will
-have heart disease
-● People are significantly more likely to have a heart disease past age 50
-Future Research:
-● Predict the magnitude of heart disease
-○ Right now it is a binary classification, we want it on a scale from 1-4
-● Transition to specific heart related diseases
-○ Ex: coronary artery disease, heart failure, or heart valve disorders
+Significant Conclusions: ● The rate of heart disease in men is significantly greater than in women ● Cholesterol and sex are the two best predictors of whether or not an individual will have heart disease ● People are significantly more likely to have a heart disease past age 50 Future Research: ● Predict the magnitude of heart disease ○ Right now it is a binary classification, we want it on a scale from 1-4 ● Transition to specific heart related diseases ○ Ex: coronary artery disease, heart failure, or heart valve disorders
