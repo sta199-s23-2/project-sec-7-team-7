@@ -4,7 +4,7 @@ subtitle: "Report"
 format: html
 editor: visual
 execute:
-  echo: true
+  echo: false
 ---
 
 # Introduction and data
@@ -544,4 +544,18 @@ There were three key results related to our primary questions that we found sign
 
 However, our data and analysis were limited in some ways, and we acknowledge some changes to make that will make our research stronger. First, our data set is fairly old, as it was made in 1988. This data may not be as up to date as we would like. Perhaps advancement in the field of heart health could yield entirely new data to examine, and the results from our analysis could no longer be applicable to heart disease patients today. Second,
 
-Significant Conclusions: ● The rate of heart disease in men is significantly greater than in women ● Cholesterol and sex are the two best predictors of whether or not an individual will have heart disease ● People are significantly more likely to have a heart disease past age 50 Future Research: ● Predict the magnitude of heart disease ○ Right now it is a binary classification, we want it on a scale from 1-4 ● Transition to specific heart related diseases ○ Ex: coronary artery disease, heart failure, or heart valve disorders
+Significant Conclusions:
+
+● The rate of heart disease in men is significantly greater than in women
+
+● Cholesterol and sex are the two best predictors of whether or not an individual will have heart disease
+
+● People are significantly more likely to have a heart disease past age 50 Future Research:
+
+● Predict the magnitude of heart disease
+
+○ Right now it is a binary classification, we want it on a scale from 1-4
+
+● Transition to specific heart related diseases
+
+○ Ex: coronary artery disease, heart failure, or heart valve disorders
