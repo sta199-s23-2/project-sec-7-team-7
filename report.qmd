@@ -34,6 +34,8 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 14. thal: \[normal; fixed defect; reversible defect\]
 15. num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.
 
+The data is cleaned by altering the variable num to be 0 if the patient has no heart disease and 1 if the patient has heart disease of any degree (1-4). We chose this format
+
 ## Literature Review
 
 Citation:
