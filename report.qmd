@@ -547,12 +547,17 @@ However, our data and analysis were limited in some ways, and we acknowledge som
 Significant Conclusions:
 
 ● The rate of heart disease in men is significantly greater than in women
+
 ● Cholesterol and sex are the two best predictors of whether or not an individual will have heart disease
+
 ● People are significantly more likely to have a heart disease past age 50
 
 Future Research:
 
 ● Predict the magnitude of heart disease
+
   ○ Right now it is a binary classification, we want it on a scale from 1-4
+  
 ● Transition to specific heart related diseases
+
   ○ Ex: coronary artery disease, heart failure, or heart valve disorders
