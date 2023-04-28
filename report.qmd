@@ -167,7 +167,7 @@ Statistical Procedure:
 
 We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. Based on the EDA, we predicted key interactions and then wanted to see how these interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease. We used AIC to find the best model and chose the two logistic regressions with the lowest AIC values. For the hypothesis test, we wanted to determine if males and females had different rates of heart disease, as suggested in our EDA, so we conducted a two sided hypothesis test. This relates to our research question as we are exploring the factors correlating to heart disease, including sex. We also wanted to determine if those over 50 have higher rates of heart disease than those under 50, as we predicted in our hypothesis, so we conducted a one sided hypothesis test on the topic. We used bootstrapping simulation for the hypothesis testing because we were comparing proportions, not means, and CLT is only used for means. Additionally, bootstrapping provides a visualization of the data we used for explanation.
 
-# Results
+# 
 
 ```{r}
 #| label: find-regression-and-AIC
@@ -363,4 +363,21 @@ visualize(null_dist2) +
 
 This visualization shows that based on the simulation, it is unlikely for those over 50 and under 50 to have the same rates of heart disease.
 
+# Results
+
 # Discussion
+
+There were three key results related to our primary questions that we found significant. First, the rate of heart disease in men is greater than the rate in women. Our visualizations and analysis back this claim. Second, cholesterol and sex were the two best predictors of whether or not an individual may or may not have heart disease. Our models that used the variables of cholesterol and sex had the lowest AIC values. Finally, people who are above the age of 50 were much more likely to have heart disease, and this followed a trend of increased heart disease with age. These findings were supported with our models and our analysis.
+
+However, our data and analysis were limited in some ways, and we acknowledge some changes to make that will make our research stronger. First, our data set is fairly old, as it was made in 1988. This data may not be as up to date as we would like. Perhaps advancement in the field of heart health could yield entirely new data to examine, and the results from our analysis could no longer be applicable to heart disease patients today. Second,
+
+Significant Conclusions:
+● The rate of heart disease in men is significantly greater than in women
+● Cholesterol and sex are the two best predictors of whether or not an individual will
+have heart disease
+● People are significantly more likely to have a heart disease past age 50
+Future Research:
+● Predict the magnitude of heart disease
+○ Right now it is a binary classification, we want it on a scale from 1-4
+● Transition to specific heart related diseases
+○ Ex: coronary artery disease, heart failure, or heart valve disorders
