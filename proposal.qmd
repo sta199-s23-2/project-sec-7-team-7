@@ -18,7 +18,7 @@ library(tidyverse)
 
 -   Identify the source of the data.
 
-    I found the data set on kaggle.
+    The data set was found on kaggle.
 
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
