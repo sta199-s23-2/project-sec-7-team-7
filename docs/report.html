@@ -172,6 +172,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review">Literature Review</a></li>
   </ul></li>
   <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   </ul>
@@ -199,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="introduction-and-data" class="level1">
 <h1>Introduction and data</h1>
-<p>The topic we chose to assess is: How does heart disease presence and magnitude vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? We chose to research this topic to explore what variables affect the prevalence of heart disease using data from patients in Cleveland, Hungary, Switzerland, and the VA Long Beach. We hope that by examining the correlation between these variables and presence of heart disease, we can gain insight into how/to what extent these variables contribute to a heart disease diagnosis. Understanding what leads to heart disease is incredibly important as it affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. According to the CDC, heart disease is responsible for around 1 every 5 deaths which is why it is critical to understand the responsibility of underlying factors.</p>
+<p>The topic we chose to assess is: How does heart disease presence vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? We chose to research this topic to explore what variables affect the prevalence of heart disease using data from patients in Cleveland, Hungary, Switzerland, and the VA Long Beach. We hope that by examining the correlation between these variables and presence of heart disease, we can gain insight into how/to what extent these variables contribute to a heart disease diagnosis. Understanding what leads to heart disease is incredibly important as it affects hundreds of thousands of people across the world. It can come in many different shapes and forms, such as coronary artery disease, heart failure, and heart valve disorders. According to the CDC, heart disease is responsible for around 1 every 5 deaths which is why it is critical to understand the responsibility of underlying factors.</p>
 <p>We hypothesize that firstly, the older an individual is, the higher cholesterol, blood sugar, and blood pressure and individual has, the more likely they are to develop a heart disease of large magnitude. Secondly, we hypothesize that the age, sex, cholesterol, blood sugar, blood pressure, and the number of major vessels are the best predictors of whether or not an individual will develop heart disease.</p>
 <p>We do acknowledge the potential ethical concerns of this research, with the main concern being results communication, specifically that we accurately represent our results. If we misinterpret/misrepresent our results unintentionally, it could be concerning, especially given the topic of our research. Ways to prevent this ethical concern is by formulating research questions in a way that tries to find out the truth rather than proving a viewpoint, by including data outliers that may not fit with our hypothesis, and more.</p>
 <p>We found the data set on kaggle, but the data was initially collected by the Hungarian Institute of Cardiology, and the Cleveland Clinic Foundation. This synthesis of information was donated to the University of California at Irvine’s Machine learning Repository in 1988. Some relevant variables include:</p>
@@ -210,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>cp: chest pain type ([typical angina, atypical angina, non-anginal, asymptomatic])</li>
 <li>trestbps: resting blood pressure (resting blood pressure (in mm Hg on admission to the hospital))</li>
 <li>chol: (serum cholesterol in mg/dl)</li>
-<li>fbs: (if fasting blood sugar &gt; 120 mg/dl)</li>
+<li>fbs: (if fasting blood sugar &gt; 150 mg/dl)</li>
 <li>restecg: (resting electrocardiographic results)<br>
 -- Values: [normal, stt abnormality, lv hypertrophy]</li>
 <li>thalach: maximum heart rate achieved</li>
@@ -221,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>thal: [normal; fixed defect; reversible defect]</li>
 <li>num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.</li>
 </ol>
-<p>The data is cleaned by altering the variable num to be 0 if the patient has no heart disease and 1 if the patient has heart disease of any degree (1-4). We chose this format</p>
+<p>The data is cleaned by altering the variable num to be 0 if the patient has no heart disease and 1 if the patient has heart disease of any degree (1-4). We chose this format because we were interested in exploring only the predictors of having heart disease, and not the predictors of its severity. For individual logistic regressions and hypothesis testing, we filter cholesterol != 0 when using cholesterol as an explanatory variable and bp != 0 when using blood pressure as an explanatory variable because humans do not have 0 cholesterol or blood pressure so we assume this is due to lack of data and not actual observation. We also filter out NA data for blood pressure and blood sugar when using that variable in a hypothesis test because NA values are not applicable in our hypothesis tests.</p>
 <section id="literature-review" class="level2">
 <h2 class="anchored" data-anchor-id="literature-review">Literature Review</h2>
 <p>Citation:</p>
@@ -394,9 +395,11 @@ $ num      &lt;dbl&gt; 0, 2, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 
 </div>
 </div>
 <p>For females, as blood pressure increases past about 115, higher bp is correlated with higher rates of heart disease. Below 115, lower bp is correlated with higher rates of heart disease. For males, There is not as strong a correlation between blood pressure and heart disease rates. We filtered would bp = 0 because that is not possible and a filler of not recorded data. We chose to facet this by gender because men and women have different average blood pressures.</p>
+<p>Statistical Procedure:</p>
+<p>We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. Based on the EDA, we predicted key interactions and then wanted to see how these interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease. We used AIC to find the best model and chose the two logistic regressions with the lowest AIC values. For the hypothesis test, we wanted to determine if males and females had different rates of heart disease, as suggested in our EDA, so we conducted a two sided hypothesis test. This relates to our research question as we are exploring the factors correlating to heart disease, including sex. We also wanted to determine if those over certain ages, blood sugar, cholesterol, and blood pressure had higher rates of heart disease, as we predicted in our hypothesis, so we conducted a one sided hypothesis test on these topics at cutoffs we determined from our EDA. We used bootstrapping simulation for the hypothesis testing because we were comparing proportions, not means, and CLT is only used for means. Additionally, bootstrapping provides a visualization of the data we used for explanation.</p>
 </section>
-<section id="results" class="level1">
-<h1>Results</h1>
+<section id="section" class="level1">
+<h1></h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>heart_disease_fct <span class="ot">&lt;-</span> heart_disease <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">num =</span> <span class="fu">as.factor</span>(num))</span>
@@ -508,7 +511,6 @@ $ num      &lt;dbl&gt; 0, 2, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 
 <p>Second Best Model (chol * age)</p>
 <p><span class="math inline">\(log(\hat{p} / (1-\hat{p})) = -9.54 + .024*chol + .162*age - .0004 * chol * age\)</span></p>
 <p>where <span class="math inline">\(\hat{p}\)</span> is the probability of heart disease.</p>
-<p>We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. We then wanted to see how certain interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease.</p>
 <p>Hypothesis Test 1:</p>
 <p>Null hypothesis: The true proportion of males (m) with heart disease is the same as the true proportion of females (f) with heart disease.</p>
 <p>Alternate hypothesis: The true proportion of males with heart disease is not the same as the true proportion of females with heart disease.</p>
@@ -570,7 +572,7 @@ approximation based on the number of `reps` chosen in the `generate()` step. See
 <p><img src="report_files/figure-html/gender-null-dist-vis-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This visualization shows that based on the simulation, it is unlikely for men and women to have the same rates of heart disease.</p>
+<p>This visualization shows that based on the simulation, it is unlikely it is unlikely to have our observed difference in proportion given no difference of heart disease rate for men and women.</p>
 <p>Hypothesis Test 2:</p>
 <p>Null hypothesis: The true proportion of people over 50 (over) with heart disease is the same as the true proportion of those 50 and under (under) with heart disease.</p>
 <p>Alternate hypothesis: The true proportion of people over 50 with heart disease is greater than the true proportion of those 50 and under with heart disease.</p>
@@ -636,10 +638,209 @@ approximation based on the number of `reps` chosen in the `generate()` step. See
 <p><img src="report_files/figure-html/age-null-dist-vis-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>This visualization shows that based on the simulation, it is unlikely for those over 50 and under 50 to have the same rates of heart disease.</p>
+<p>This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates for those over 50 and under 50.</p>
+<p>Hypothesis Test 3:</p>
+<p>Null hypothesis: The true proportion of people with fasting blood sugar over 150 mg/dl (over) with heart disease is the same as the true proportion of those with fasting blood sugar under 150 mg/dl (under) with heart disease.</p>
+<p>Alternate hypothesis: The true proportion of people with fasting blood sugar over 150 mg/dl (over) with heart disease is greater than the true proportion of those with fasting blood sugar under 150 mg/dl (under) with heart disease.</p>
+<p><span class="math inline">\(H_0: \pi_{over} - \pi_{under} = 0\)</span> <span class="math inline">\(H_a: \pi_{over} - \pi_{under} &gt; 0\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>heart_disease_fbs <span class="ot">&lt;-</span> heart_disease_fct <span class="sc">|&gt;</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(fbs))</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>heart_disease_fbs <span class="sc">|&gt;</span>  </span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fbs, num) <span class="sc">|&gt;</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">x =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'fbs'. You can override using the `.groups`
+argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   fbs [2]
+  fbs   num       x
+  &lt;lgl&gt; &lt;fct&gt; &lt;int&gt;
+1 FALSE 0       353
+2 FALSE 1       339
+3 TRUE  0        44
+4 TRUE  1        94</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>obs_prop_diff3 <span class="ot">&lt;-</span> <span class="dv">94</span> <span class="sc">/</span> (<span class="dv">44</span> <span class="sc">+</span> <span class="dv">94</span>) <span class="sc">-</span> <span class="dv">339</span> <span class="sc">/</span> (<span class="dv">353</span> <span class="sc">+</span> <span class="dv">339</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>obs_prop_diff3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.191275</code></pre>
+</div>
+</div>
+<p>The observed difference in proportion is 0.191275.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>null_dist3 <span class="ot">&lt;-</span> heart_disease_fbs <span class="sc">|&gt;</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> num , <span class="at">explanatory =</span> fbs, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span>, <span class="st">"FALSE"</span>))</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>null_dist3 <span class="sc">|&gt;</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff3, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Please be cautious in reporting a p-value of 0. This result is an
+approximation based on the number of `reps` chosen in the `generate()` step. See
+`?get_p_value()` for more information.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1       0</code></pre>
+</div>
+</div>
+<p>The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with fbs over 150 mg/dl who get heart disease is greater than the proportion of people with fbs under 150 mg/dl who get heart disease.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist3) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff3, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in min(diff(unique_loc)): no non-missing arguments to min; returning Inf</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/fbs-null-dist-vis-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with fbs over and under 150 mg/dl.</p>
+<p>Hypothesis Test 4:</p>
+<p>Null hypothesis: The true proportion of people with cholesterol over 250 mg/dl (over) with heart disease is the same as the true proportion of those with cholesterol under 250 mg/dl (under) with heart disease.</p>
+<p>Alternate hypothesis: The true proportion of people with cholesterol over 250 mg/dl with heart disease is greater than the true proportion of those with cholesterol under 250 mg/dl with heart disease.</p>
+<p><span class="math inline">\(H_0: \pi_{over} - \pi_{under} = 0\)</span> <span class="math inline">\(H_a: \pi_{over} - \pi_{under} &gt; 0\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>heart_disease_chol <span class="ot">&lt;-</span> heart_disease_fct <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(chol <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">over_250 =</span> <span class="fu">if_else</span>(chol <span class="sc">&gt;</span> <span class="dv">250</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>))</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>heart_disease_chol <span class="sc">|&gt;</span>  </span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(over_250, num) <span class="sc">|&gt;</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">x =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'over_250'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   over_250 [2]
+  over_250 num       x
+  &lt;chr&gt;    &lt;fct&gt; &lt;int&gt;
+1 No       0       237
+2 No       1       179
+3 Yes      0       135
+4 Yes      1       167</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>obs_prop_diff4 <span class="ot">&lt;-</span> <span class="dv">167</span> <span class="sc">/</span> (<span class="dv">135</span> <span class="sc">+</span> <span class="dv">167</span>) <span class="sc">-</span> <span class="dv">179</span> <span class="sc">/</span> (<span class="dv">237</span> <span class="sc">+</span> <span class="dv">179</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>obs_prop_diff4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1226917</code></pre>
+</div>
+</div>
+<p>The observed difference in proportion is 0.1226917</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>null_dist4 <span class="ot">&lt;-</span> heart_disease_chol <span class="sc">|&gt;</span></span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> num , <span class="at">explanatory =</span> over_250, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>))</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>null_dist4 <span class="sc">|&gt;</span></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff4, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.001</code></pre>
+</div>
+</div>
+<p>The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with cholesterol over 250 mg/dl who get heart disease is greater than the proportion of people with cholesterol under 250 mg/dl who get heart disease.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist4) <span class="sc">+</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff4, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/chol-null-dist-vis-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with cholesterol over and under 250 mg/dl.</p>
+<p>Hypothesis Test 5:</p>
+<p>Null hypothesis: The true proportion of people with resting blood pressure over 120 mm Hg (over) with heart disease is the same as the true proportion of those with resting blood pressure under 120 mm Hg (under) with heart disease.</p>
+<p>Alternate hypothesis: The true proportion of people with blood pressure over 120 mm Hg with heart disease is greater than the true proportion of those with blood pressure under 120 mm Hg with heart disease.</p>
+<p><span class="math inline">\(H_0: \pi_{over} - \pi_{under} = 0\)</span> <span class="math inline">\(H_a: \pi_{over} - \pi_{under} &gt; 0\)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>heart_disease_bp <span class="ot">&lt;-</span> heart_disease_fct <span class="sc">|&gt;</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(trestbps), trestbps <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">over_120 =</span> <span class="fu">if_else</span>(trestbps <span class="sc">&gt;</span> <span class="dv">120</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>))</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>heart_disease_bp <span class="sc">|&gt;</span>  </span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(over_120, num) <span class="sc">|&gt;</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">x =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'over_120'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   over_120 [2]
+  over_120 num       x
+  &lt;chr&gt;    &lt;fct&gt; &lt;int&gt;
+1 No       0       151
+2 No       1       141
+3 Yes      0       240
+4 Yes      1       328</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>obs_prop_diff5 <span class="ot">&lt;-</span> <span class="dv">328</span> <span class="sc">/</span> (<span class="dv">240</span> <span class="sc">+</span> <span class="dv">328</span>) <span class="sc">-</span> <span class="dv">141</span> <span class="sc">/</span> (<span class="dv">151</span> <span class="sc">+</span> <span class="dv">141</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>obs_prop_diff5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09458808</code></pre>
+</div>
+</div>
+<p>The observed difference in proportion is 0.09458808.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>null_dist5 <span class="ot">&lt;-</span> heart_disease_bp <span class="sc">|&gt;</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> num , <span class="at">explanatory =</span> over_120, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>))</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>null_dist5 <span class="sc">|&gt;</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a> <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff5, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  p_value
+    &lt;dbl&gt;
+1   0.002</code></pre>
+</div>
+</div>
+<p>The p-value is .005, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with resting blood pressure over 120 mm Hg who get heart disease is greater than the proportion of people with resting blood pressure under 120 mm Hg who get heart disease.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist5) <span class="sc">+</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_prop_diff5, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/bp-null-dist-vis-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with resting blood pressure over and under 120 mg/dl.</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>Our research question was: how does heart disease presence vary based on the age, sex, cholesterol, blood sugar, and blood pressure? Furthermore, what variables are the best predictor of whether or not an individual will get heart disease? Through a hypothesis test we were able to determine that there is enough statistically significant evidence to conclude that the rate of heart disease in men is not equal to the rate of heart disease in women. Furthermore, though data visualization, we were able to determine that the rate of heart disease in men is greater than that of women.</p>
+<p>We were also able to determine that age is a significant factor in heart disease and that there was enough statistically significant evidence to conclude that the rate of heart disease in people over 50 is greater than the rate of heart disease in people under 50. We also saw a positive correlation between the cholesterol, blood sugar, and blood pressure levels and heart disease rates.</p>
+<p>While constructing our logistic regression to model whether or not a person will contract heart disease, we found that an additive model of cholesterol and sex would be the best predictors of whether or not a person would contract heart disease.</p>
+<p>Our best model had this equation:</p>
+<p><span class="math inline">\(log(\hat{p} / (1-\hat{p})) = -2.76 + .006 * chol + 1.6 * sex\)</span></p>
+<p>In this case, sex would be a 1 if the person was a male, and 0 if the person was a female.</p>
+<p>Overall, we were able to complete our purpose and we found that age, sex, cholesterol levels, blood sugar, and blood pressure levels were all indicators of heart disease, however, sex and cholesterol were the two most accurate predictors.</p>
 </section>
 <section id="discussion" class="level1">
 <h1>Discussion</h1>
+<p>There were three key results related to our primary questions that we found significant. First, the rate of heart disease in men is greater than the rate in women. Our visualizations and analysis back this claim. Second, cholesterol and sex were the two best predictors of whether or not an individual may or may not have heart disease. Our models that used the variables of cholesterol and sex had the lowest AIC values. Finally, people who are above the age of 50 were much more likely to have heart disease, and this followed a trend of increased heart disease with age. These findings were supported with our models and our analysis.</p>
+<p>However, our data and analysis were limited in some ways, and we acknowledge some changes to make that will make our research stronger. First, our data set is fairly old, as it was made in 1988. This data may not be as up to date as we would like. Perhaps advancement in the field of heart health could yield entirely new data to examine, and the results from our analysis could no longer be applicable to heart disease patients today. Second,</p>
+<p>Significant Conclusions: ● The rate of heart disease in men is significantly greater than in women ● Cholesterol and sex are the two best predictors of whether or not an individual will have heart disease ● People are significantly more likely to have a heart disease past age 50 Future Research: ● Predict the magnitude of heart disease ○ Right now it is a binary classification, we want it on a scale from 1-4 ● Transition to specific heart related diseases ○ Ex: coronary artery disease, heart failure, or heart valve disorders</p>
 
 
 </section>

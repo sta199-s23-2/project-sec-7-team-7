@@ -23,7 +23,7 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 4.  cp: chest pain type (\[typical angina, atypical angina, non-anginal, asymptomatic\])
 5.  trestbps: resting blood pressure (resting blood pressure (in mm Hg on admission to the hospital))
 6.  chol: (serum cholesterol in mg/dl)
-7.  fbs: (if fasting blood sugar \> 120 mg/dl)
+7.  fbs: (if fasting blood sugar \> 150 mg/dl)
 8.  restecg: (resting electrocardiographic results)\
     \-- Values: \[normal, stt abnormality, lv hypertrophy\]
 9.  thalach: maximum heart rate achieved
@@ -34,7 +34,7 @@ We found the data set on kaggle, but the data was initially collected by the Hun
 14. thal: \[normal; fixed defect; reversible defect\]
 15. num: the predicted attribute 0 means no heart disease, and 1-4 is the degree to which they have it. In this case, 1-4 will be classified as 1, as we are not concerned with the degree to which they have heart disease, just that they have it.
 
-The data is cleaned by altering the variable num to be 0 if the patient has no heart disease and 1 if the patient has heart disease of any degree (1-4). We chose this format because we were interested in exploring only the predictors of having heart disease, and not the predictors of its severity. For individual logistic regressions, we filter cholesterol != 0 when using cholesterol as an explanatory variable and bp != 0 when using blood pressure as an explanatory variable because humans do not have 0 cholesterol or blood pressure so we assume this is due to lack of data and not actual observation.
+The data is cleaned by altering the variable num to be 0 if the patient has no heart disease and 1 if the patient has heart disease of any degree (1-4). We chose this format because we were interested in exploring only the predictors of having heart disease, and not the predictors of its severity. For individual logistic regressions and hypothesis testing, we filter cholesterol != 0 when using cholesterol as an explanatory variable and bp != 0 when using blood pressure as an explanatory variable because humans do not have 0 cholesterol or blood pressure so we assume this is due to lack of data and not actual observation. We also filter out NA data for blood pressure and blood sugar when using that variable in a hypothesis test because NA values are not applicable in our hypothesis tests.
 
 ## Literature Review
 
@@ -165,7 +165,7 @@ For females, as blood pressure increases past about 115, higher bp is correlated
 
 Statistical Procedure:
 
-We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. Based on the EDA, we predicted key interactions and then wanted to see how these interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease. We used AIC to find the best model and chose the two logistic regressions with the lowest AIC values. For the hypothesis test, we wanted to determine if males and females had different rates of heart disease, as suggested in our EDA, so we conducted a two sided hypothesis test. This relates to our research question as we are exploring the factors correlating to heart disease, including sex. We also wanted to determine if those over 50 have higher rates of heart disease than those under 50, as we predicted in our hypothesis, so we conducted a one sided hypothesis test on the topic. We used bootstrapping simulation for the hypothesis testing because we were comparing proportions, not means, and CLT is only used for means. Additionally, bootstrapping provides a visualization of the data we used for explanation.
+We use logistic regressions because we are examining whether or not individuals have heart disease, which is a categorical variable that we must convert to a factor in our data transformation. We filtered out data of cholesterol = 0 and blood pressure = 0 for regressions involving those variables because it is not possible for a living individual and is likely to do data not being collected or a null value, as opposed to the actual value. We chose these variables and interactions because we wanted a large breadth of variables potentially correlating with heart disease. Based on the EDA, we predicted key interactions and then wanted to see how these interactions we predicted to be important, such as bp and sex, cholesterol and age, blood sugar and age, and cholesterol and sex, predicted heart disease. We used AIC to find the best model and chose the two logistic regressions with the lowest AIC values. For the hypothesis test, we wanted to determine if males and females had different rates of heart disease, as suggested in our EDA, so we conducted a two sided hypothesis test. This relates to our research question as we are exploring the factors correlating to heart disease, including sex. We also wanted to determine if those over certain ages, blood sugar, cholesterol, and blood pressure had higher rates of heart disease, as we predicted in our hypothesis, so we conducted a one sided hypothesis test on these topics at cutoffs we determined from our EDA. We used bootstrapping simulation for the hypothesis testing because we were comparing proportions, not means, and CLT is only used for means. Additionally, bootstrapping provides a visualization of the data we used for explanation.
 
 # 
 
@@ -309,7 +309,7 @@ visualize(null_dist) +
 
 ```
 
-This visualization shows that based on the simulation, it is unlikely for men and women to have the same rates of heart disease.
+This visualization shows that based on the simulation, it is unlikely it is unlikely to have our observed difference in proportion given no difference of heart disease rate for men and women.
 
 Hypothesis Test 2:
 
@@ -361,7 +361,166 @@ visualize(null_dist2) +
 
 ```
 
-This visualization shows that based on the simulation, it is unlikely for those over 50 and under 50 to have the same rates of heart disease.
+This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates for those over 50 and under 50.
+
+Hypothesis Test 3:
+
+Null hypothesis: The true proportion of people with fasting blood sugar over 150 mg/dl (over) with heart disease is the same as the true proportion of those with fasting blood sugar under 150 mg/dl (under) with heart disease.
+
+Alternate hypothesis: The true proportion of people with fasting blood sugar over 150 mg/dl (over) with heart disease is greater than the true proportion of those with fasting blood sugar under 150 mg/dl (under) with heart disease.
+
+$H_0: \pi_{over} - \pi_{under} = 0$ $H_a: \pi_{over} - \pi_{under} > 0$
+
+```{r}
+#| label: observed-stat-fbs
+
+heart_disease_fbs <- heart_disease_fct |>
+  filter(!is.na(fbs))
+
+heart_disease_fbs |>  
+  group_by(fbs, num) |>
+  summarize(x = n())
+
+obs_prop_diff3 <- 94 / (44 + 94) - 339 / (353 + 339)
+
+obs_prop_diff3
+
+```
+
+The observed difference in proportion is 0.191275.
+
+```{r}
+#| label: hypothesis-test-fbs
+
+null_dist3 <- heart_disease_fbs |>
+  specify(response = num , explanatory = fbs, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("TRUE", "FALSE"))
+
+null_dist3 |>
+ get_p_value(obs_stat = obs_prop_diff3, direction = "greater") 
+
+```
+
+The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with fbs over 150 mg/dl who get heart disease is greater than the proportion of people with fbs under 150 mg/dl who get heart disease.
+
+```{r}
+#| label: fbs-null-dist-vis
+
+visualize(null_dist3) +
+ shade_p_value(obs_stat = obs_prop_diff3, direction = "greater") 
+
+```
+
+This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with fbs over and under 150 mg/dl.
+
+Hypothesis Test 4:
+
+Null hypothesis: The true proportion of people with cholesterol over 250 mg/dl (over) with heart disease is the same as the true proportion of those with cholesterol under 250 mg/dl (under) with heart disease.
+
+Alternate hypothesis: The true proportion of people with cholesterol over 250 mg/dl with heart disease is greater than the true proportion of those with cholesterol under 250 mg/dl with heart disease.
+
+$H_0: \pi_{over} - \pi_{under} = 0$ $H_a: \pi_{over} - \pi_{under} > 0$
+
+```{r}
+#| label: observed-stat-chol
+
+heart_disease_chol <- heart_disease_fct |>
+  filter(chol != 0) |>
+  mutate(over_250 = if_else(chol > 250, "Yes", "No"))
+  
+
+heart_disease_chol |>  
+  group_by(over_250, num) |>
+  summarize(x = n())
+
+obs_prop_diff4 <- 167 / (135 + 167) - 179 / (237 + 179)
+
+obs_prop_diff4
+
+```
+
+The observed difference in proportion is 0.1226917
+
+```{r}
+#| label: hypothesis-test-chol
+
+null_dist4 <- heart_disease_chol |>
+  specify(response = num , explanatory = over_250, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("Yes", "No"))
+
+null_dist4 |>
+ get_p_value(obs_stat = obs_prop_diff4, direction = "greater") 
+
+```
+
+The p-value is close to 0, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with cholesterol over 250 mg/dl who get heart disease is greater than the proportion of people with cholesterol under 250 mg/dl who get heart disease.
+
+```{r}
+#| label: chol-null-dist-vis
+
+visualize(null_dist4) +
+ shade_p_value(obs_stat = obs_prop_diff4, direction = "greater") 
+
+```
+
+This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with cholesterol over and under 250 mg/dl.
+
+Hypothesis Test 5:
+
+Null hypothesis: The true proportion of people with resting blood pressure over 120 mm Hg (over) with heart disease is the same as the true proportion of those with resting blood pressure under 120 mm Hg (under) with heart disease.
+
+Alternate hypothesis: The true proportion of people with blood pressure over 120 mm Hg with heart disease is greater than the true proportion of those with blood pressure under 120 mm Hg with heart disease.
+
+$H_0: \pi_{over} - \pi_{under} = 0$ $H_a: \pi_{over} - \pi_{under} > 0$
+
+```{r}
+#| label: observed-stat-bp
+
+heart_disease_bp <- heart_disease_fct |>
+  filter(!is.na(trestbps), trestbps != 0) |>
+  mutate(over_120 = if_else(trestbps > 120, "Yes", "No"))
+  
+
+heart_disease_bp |>  
+  group_by(over_120, num) |>
+  summarize(x = n())
+
+obs_prop_diff5 <- 328 / (240 + 328) - 141 / (151 + 141)
+
+obs_prop_diff5
+```
+
+The observed difference in proportion is 0.09458808.
+
+```{r}
+#| label: hypothesis-test-bp
+
+null_dist5 <- heart_disease_bp |>
+  specify(response = num , explanatory = over_120, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("Yes", "No"))
+
+null_dist5 |>
+ get_p_value(obs_stat = obs_prop_diff5, direction = "greater") 
+
+```
+
+The p-value is .005, meaning it will be smaller than an alpha of .05. We reject the null hypothesis, and there is strong evidence to conclude that the proportion of people with resting blood pressure over 120 mm Hg who get heart disease is greater than the proportion of people with resting blood pressure under 120 mm Hg who get heart disease.
+
+```{r}
+#| label: bp-null-dist-vis
+
+visualize(null_dist5) +
+ shade_p_value(obs_stat = obs_prop_diff5, direction = "greater") 
+
+```
+
+This visualization shows that based on the simulation, it is unlikely to have our observed difference in proportion given no difference of heart disease rates in those with resting blood pressure over and under 120 mg/dl.
 
 # Results
 
